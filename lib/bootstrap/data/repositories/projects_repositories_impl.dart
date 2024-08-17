@@ -4,6 +4,7 @@ import 'package:flutter_todo/core/usecases/usecases.dart';
 
 import '../../../core/error/failures.dart';
 import '../../domain/repositoires/projects_repositories.dart';
+import '../../domain/usecases/create_project.dart';
 import '../source/projects_remote_source.dart';
 
 class ProjectsRepositoriesImpl implements ProjectsRepositories {
@@ -17,5 +18,14 @@ class ProjectsRepositoriesImpl implements ProjectsRepositories {
     return response.fold((failure) => Left(failure), (successRes) {
       return Right(successRes.toEntity());
     });
+  }
+
+  @override
+  Future<Either<Failure, ProjectEntity>> createProject(
+      CreateProjectParams params) async {
+    final response = await source.createProject(params);
+
+    return response.fold(
+        (failure) => Left(failure), (result) => Right(result.toEntity()));
   }
 }

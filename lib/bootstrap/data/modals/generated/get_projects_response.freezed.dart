@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../projects_response.dart';
+part of '../get_projects_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,27 +15,27 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$ProjectsResponse {
+mixin _$GetProjectsResponse {
   List<Project>? get projects => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ProjectsResponseCopyWith<ProjectsResponse> get copyWith =>
+  $GetProjectsResponseCopyWith<GetProjectsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ProjectsResponseCopyWith<$Res> {
-  factory $ProjectsResponseCopyWith(
-          ProjectsResponse value, $Res Function(ProjectsResponse) then) =
-      _$ProjectsResponseCopyWithImpl<$Res, ProjectsResponse>;
+abstract class $GetProjectsResponseCopyWith<$Res> {
+  factory $GetProjectsResponseCopyWith(
+          GetProjectsResponse value, $Res Function(GetProjectsResponse) then) =
+      _$GetProjectsResponseCopyWithImpl<$Res, GetProjectsResponse>;
   @useResult
   $Res call({List<Project>? projects});
 }
 
 /// @nodoc
-class _$ProjectsResponseCopyWithImpl<$Res, $Val extends ProjectsResponse>
-    implements $ProjectsResponseCopyWith<$Res> {
-  _$ProjectsResponseCopyWithImpl(this._value, this._then);
+class _$GetProjectsResponseCopyWithImpl<$Res, $Val extends GetProjectsResponse>
+    implements $GetProjectsResponseCopyWith<$Res> {
+  _$GetProjectsResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -57,22 +57,22 @@ class _$ProjectsResponseCopyWithImpl<$Res, $Val extends ProjectsResponse>
 }
 
 /// @nodoc
-abstract class _$$ProjectsResponseImplCopyWith<$Res>
-    implements $ProjectsResponseCopyWith<$Res> {
-  factory _$$ProjectsResponseImplCopyWith(_$ProjectsResponseImpl value,
-          $Res Function(_$ProjectsResponseImpl) then) =
-      __$$ProjectsResponseImplCopyWithImpl<$Res>;
+abstract class _$$GetProjectsResponseImplCopyWith<$Res>
+    implements $GetProjectsResponseCopyWith<$Res> {
+  factory _$$GetProjectsResponseImplCopyWith(_$GetProjectsResponseImpl value,
+          $Res Function(_$GetProjectsResponseImpl) then) =
+      __$$GetProjectsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Project>? projects});
 }
 
 /// @nodoc
-class __$$ProjectsResponseImplCopyWithImpl<$Res>
-    extends _$ProjectsResponseCopyWithImpl<$Res, _$ProjectsResponseImpl>
-    implements _$$ProjectsResponseImplCopyWith<$Res> {
-  __$$ProjectsResponseImplCopyWithImpl(_$ProjectsResponseImpl _value,
-      $Res Function(_$ProjectsResponseImpl) _then)
+class __$$GetProjectsResponseImplCopyWithImpl<$Res>
+    extends _$GetProjectsResponseCopyWithImpl<$Res, _$GetProjectsResponseImpl>
+    implements _$$GetProjectsResponseImplCopyWith<$Res> {
+  __$$GetProjectsResponseImplCopyWithImpl(_$GetProjectsResponseImpl _value,
+      $Res Function(_$GetProjectsResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$ProjectsResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? projects = freezed,
   }) {
-    return _then(_$ProjectsResponseImpl(
+    return _then(_$GetProjectsResponseImpl(
       projects: freezed == projects
           ? _value._projects
           : projects // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$ProjectsResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProjectsResponseImpl extends _ProjectsResponse {
-  const _$ProjectsResponseImpl({final List<Project>? projects})
+class _$GetProjectsResponseImpl extends _GetProjectsResponse {
+  const _$GetProjectsResponseImpl({final List<Project>? projects})
       : _projects = projects,
         super._();
 
@@ -108,14 +108,14 @@ class _$ProjectsResponseImpl extends _ProjectsResponse {
 
   @override
   String toString() {
-    return 'ProjectsResponse(projects: $projects)';
+    return 'GetProjectsResponse(projects: $projects)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProjectsResponseImpl &&
+            other is _$GetProjectsResponseImpl &&
             const DeepCollectionEquality().equals(other._projects, _projects));
   }
 
@@ -126,20 +126,20 @@ class _$ProjectsResponseImpl extends _ProjectsResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProjectsResponseImplCopyWith<_$ProjectsResponseImpl> get copyWith =>
-      __$$ProjectsResponseImplCopyWithImpl<_$ProjectsResponseImpl>(
+  _$$GetProjectsResponseImplCopyWith<_$GetProjectsResponseImpl> get copyWith =>
+      __$$GetProjectsResponseImplCopyWithImpl<_$GetProjectsResponseImpl>(
           this, _$identity);
 }
 
-abstract class _ProjectsResponse extends ProjectsResponse {
-  const factory _ProjectsResponse({final List<Project>? projects}) =
-      _$ProjectsResponseImpl;
-  const _ProjectsResponse._() : super._();
+abstract class _GetProjectsResponse extends GetProjectsResponse {
+  const factory _GetProjectsResponse({final List<Project>? projects}) =
+      _$GetProjectsResponseImpl;
+  const _GetProjectsResponse._() : super._();
 
   @override
   List<Project>? get projects;
   @override
   @JsonKey(ignore: true)
-  _$$ProjectsResponseImplCopyWith<_$ProjectsResponseImpl> get copyWith =>
+  _$$GetProjectsResponseImplCopyWith<_$GetProjectsResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

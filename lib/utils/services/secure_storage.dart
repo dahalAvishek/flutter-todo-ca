@@ -1,11 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 enum SecureStorageKeys {
-  token,
   isFirstTime,
-  isLogin,
-  hasSellerProfile,
-  isVerifiedSeller
 }
 
 mixin class SecureStorageMixin {

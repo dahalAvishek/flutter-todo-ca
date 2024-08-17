@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo/bootstrap/presentation/blocs/get_projects/get_projects_bloc.dart';
 
 import 'bootstrap/presentation/blocs/app/app_bloc.dart';
+import 'bootstrap/presentation/blocs/create_project/create_project_bloc.dart';
 import 'core/routes/router_builder.dart';
 import 'utils/dependencies_injection.dart';
 
@@ -38,6 +40,12 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => sl<AppBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<CreateProjectBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<GetProjectsBloc>(),
         ),
       ],
       child: MaterialApp.router(

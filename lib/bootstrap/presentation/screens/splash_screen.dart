@@ -1,31 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo/bootstrap/presentation/blocs/get_projects/get_projects_bloc.dart';
 import 'package:flutter_todo/core/presentations/gapped_list.dart';
+import 'package:flutter_todo/core/routes/app_routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/constants/app_colors.dart';
-import '../../../core/routes/app_routes.dart';
+import '../../domain/usecases/create_project.dart';
 import '../blocs/app/app_bloc.dart';
+import '../blocs/create_project/create_project_bloc.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: context.read<AppBloc>()..add(const AppEvent.checkProject()),
-      child: BlocListener<AppBloc, AppState>(
-        listener: (context, state) {
-          state.mapOrNull(
-            successCheckProject: (value) {
-              if (value.project.name != null) {
-                context.replace(TASKS_ROUTE);
-              }
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: context.read<AppBloc>()..add(const AppEvent.checkOnBoard()),
+        ),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<AppBloc, AppState>(
+            listener: (context, state) {
+              state.mapOrNull(
+                successOnBoard: (value) {
+                  // if (!value.isFirstTime) {
+                  //   context.replace(TASKS_ROUTE);
+                  //   return;
+                  // }
+                  context
+                      .read<GetProjectsBloc>()
+                      .add(const GetProjectsEvent.attempt());
+                },
+              );
             },
-          );
-        },
+          ),
+          BlocListener<GetProjectsBloc, GetProjectsState>(
+            listener: (context, state) {
+              state.mapOrNull(success: (value) {
+                context.replace(TASKS_ROUTE);
+              }, failure: (value) {
+                context.read<CreateProjectBloc>().add(
+                    const CreateProjectEvent.attempt(
+                        CreateProjectParams(name: "My Todo App")));
+              });
+            },
+          ),
+          BlocListener<CreateProjectBloc, CreateProjectState>(
+            listener: (context, state) {
+              state.mapOrNull(
+                success: (value) {
+                  if (value.project?.id != null) {
+                    context.replace(TASKS_ROUTE);
+                    return;
+                  }
+                  context
+                      .read<GetProjectsBloc>()
+                      .add(const GetProjectsEvent.attempt());
+                },
+              );
+            },
+          ),
+        ],
         child: Scaffold(
           backgroundColor: AppColors.black,
           body: Center(
