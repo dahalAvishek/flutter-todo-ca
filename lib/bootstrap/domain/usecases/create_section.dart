@@ -1,4 +1,4 @@
-// ignore: invalid_annotation_target
+// ignore_for_file: invalid_annotation_target
 
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

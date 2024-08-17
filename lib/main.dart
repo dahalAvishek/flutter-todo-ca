@@ -9,7 +9,9 @@ import 'package:flutter_todo/bootstrap/presentation/blocs/get_projects/get_proje
 import 'bootstrap/presentation/blocs/app/app_bloc.dart';
 import 'bootstrap/presentation/blocs/create_project/create_project_bloc.dart';
 import 'bootstrap/presentation/blocs/get_sections/get_sections_bloc.dart';
+import 'core/constants/app_colors.dart';
 import 'core/routes/router_builder.dart';
+import 'layers/presentation/blocs/get_tasks/get_tasks_bloc.dart';
 import 'utils/dependencies_injection.dart';
 
 void main() {
@@ -55,10 +57,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => sl<GetSectionsBloc>(),
         ),
+        BlocProvider(
+          create: (context) => sl<GetTasksBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         title: 'Flutter Demo',
         theme: ThemeData(
+          scaffoldBackgroundColor: AppColors.grayAccent,
           // This is the theme of your application.
           //
           // TRY THIS: Try running your application with "flutter run". You'll see
@@ -74,7 +80,27 @@ class MyApp extends StatelessWidget {
           //
           // This works for code too, not just values: Most code changes can be
           // tested with just a hot reload.
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme(
+            brightness: Brightness.light,
+            surface: AppColors.white,
+            onSurface: AppColors.dark,
+            onPrimary: AppColors.dark,
+            primary: AppColors.primary,
+            secondary: AppColors.grayAccent,
+            onSecondary: AppColors.grayDark,
+            tertiary: AppColors.gray,
+            // onTertiary: AppColors.gray,
+            primaryContainer: AppColors.white,
+            onPrimaryContainer: AppColors.dark,
+            // secondaryContainer: AppColors.white,
+            // onSecondaryContainer: AppColors.gray,
+            outline: AppColors.border,
+            outlineVariant: AppColors.gray,
+            onErrorContainer: AppColors.white,
+            errorContainer: AppColors.error.withOpacity(0.1),
+            onError: AppColors.error.withOpacity(0.5),
+            error: AppColors.error,
+          ),
           textTheme: const TextTheme(
             // Heading 1
             displayLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),

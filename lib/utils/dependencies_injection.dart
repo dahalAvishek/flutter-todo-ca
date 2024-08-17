@@ -20,6 +20,11 @@ import '../bootstrap/presentation/blocs/create_project/create_project_bloc.dart'
 import '../bootstrap/presentation/blocs/create_sections/create_sections_bloc.dart';
 import '../bootstrap/presentation/blocs/get_sections/get_sections_bloc.dart';
 import '../core/api/api_client.dart';
+import '../layers/data/repositories/tasks_repositories_impl.dart';
+import '../layers/data/source/task_remote_source.dart';
+import '../layers/domain/repositories/task_repository.dart';
+import '../layers/domain/usecases/get_tasks.dart';
+import '../layers/presentation/blocs/get_tasks/get_tasks_bloc.dart';
 import 'services/secure_storage.dart';
 
 GetIt sl = GetIt.instance;
@@ -77,6 +82,9 @@ void _repositories() {
   sl.registerLazySingleton<SectionsRepository>(
     () => SectionsRepositoriesImpl(source: sl()),
   );
+  sl.registerLazySingleton<TaskRepository>(
+    () => TaskRepositoryImpl(source: sl()),
+  );
   sl.registerLazySingleton<AppRepository>(
     () => AppRepositoryImpl(
       appLocalSource: sl(),
@@ -94,6 +102,9 @@ void _dataSources() {
   sl.registerLazySingleton<SectionRemoteSource>(
     () => SectionRemoteSourceImpl(sl(), sl()),
   );
+  sl.registerLazySingleton<TaskRemoteSource>(
+    () => TaskRemoteSourceImpl(sl(), sl()),
+  );
 }
 
 void _useCase() {
@@ -102,6 +113,7 @@ void _useCase() {
   sl.registerLazySingleton(() => GetProjects(sl()));
   sl.registerLazySingleton(() => GetSections(sl()));
   sl.registerLazySingleton(() => GetApp(sl()));
+  sl.registerLazySingleton(() => GetTasks(sl()));
 }
 
 void _blocs() {
@@ -110,6 +122,7 @@ void _blocs() {
   sl.registerFactory(() => GetProjectsBloc(sl()));
   sl.registerFactory(() => GetSectionsBloc(sl()));
   sl.registerFactory(() => CreateSectionsBloc(sl(), sl()));
+  sl.registerFactory(() => GetTasksBloc(sl()));
 
   // sl.registerFactory(() => AddFavoriteBloc(sl()));
 }
