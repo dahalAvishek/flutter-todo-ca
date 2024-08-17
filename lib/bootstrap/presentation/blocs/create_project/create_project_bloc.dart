@@ -23,7 +23,7 @@ class CreateProjectBloc extends Bloc<CreateProjectEvent, CreateProjectState> {
         if (failure is ServerFailure) {
           emit(_Failure(failure.message ?? "Server Error!"));
         }
-      }, (getProvincesEntity) => emit(_Success(getProvincesEntity)));
+      }, (project) => emit(_Success(project)));
     });
   }
 }

@@ -24,8 +24,9 @@ class GetProjectsBloc extends Bloc<GetProjectsEvent, GetProjectsState> {
       }, (results) {
         ProjectEntity? project = results.projects?.firstWhere(
           (element) => element.name == "My Todo App",
+          orElse: () => const ProjectEntity(),
         );
-        if (project != null) {
+        if (project != null && project.id != null) {
           emit(_Success(ProjectEntity(id: project.id, name: project.name)));
         } else {
           emit(const _Failure("no such project"));

@@ -11,6 +11,8 @@ import '../../../core/constants/app_colors.dart';
 import '../../domain/usecases/create_project.dart';
 import '../blocs/app/app_bloc.dart';
 import '../blocs/create_project/create_project_bloc.dart';
+import '../blocs/create_sections/create_sections_bloc.dart';
+import '../blocs/get_sections/get_sections_bloc.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -43,7 +45,12 @@ class SplashScreen extends StatelessWidget {
           BlocListener<GetProjectsBloc, GetProjectsState>(
             listener: (context, state) {
               state.mapOrNull(success: (value) {
-                context.replace(TASKS_ROUTE);
+                context
+                    .read<GetSectionsBloc>()
+                    .add(const GetSectionsEvent.attempt());
+                // context
+                //     .read<CreateSectionsBloc>()
+                //     .add(const CreateSectionsEvent.attempt());
               }, failure: (value) {
                 context.read<CreateProjectBloc>().add(
                     const CreateProjectEvent.attempt(
@@ -51,17 +58,38 @@ class SplashScreen extends StatelessWidget {
               });
             },
           ),
+          BlocListener<GetSectionsBloc, GetSectionsState>(
+            listener: (context, state) {
+              state.mapOrNull(success: (value) {
+                context.replace(TASKS_ROUTE);
+                // context
+                //     .read<CreateSectionsBloc>()
+                //     .add(const CreateSectionsEvent.attempt());
+              }, failure: (value) {
+                context
+                    .read<CreateSectionsBloc>()
+                    .add(const CreateSectionsEvent.attempt());
+              });
+            },
+          ),
           BlocListener<CreateProjectBloc, CreateProjectState>(
             listener: (context, state) {
               state.mapOrNull(
                 success: (value) {
-                  if (value.project?.id != null) {
-                    context.replace(TASKS_ROUTE);
-                    return;
-                  }
                   context
                       .read<GetProjectsBloc>()
                       .add(const GetProjectsEvent.attempt());
+                },
+              );
+            },
+          ),
+          BlocListener<CreateSectionsBloc, CreateSectionsState>(
+            listener: (context, state) {
+              state.mapOrNull(
+                success: (value) {
+                  context
+                      .read<GetSectionsBloc>()
+                      .add(const GetSectionsEvent.attempt());
                 },
               );
             },

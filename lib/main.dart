@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo/bootstrap/presentation/blocs/create_sections/create_sections_bloc.dart';
 import 'package:flutter_todo/bootstrap/presentation/blocs/get_projects/get_projects_bloc.dart';
 
 import 'bootstrap/presentation/blocs/app/app_bloc.dart';
 import 'bootstrap/presentation/blocs/create_project/create_project_bloc.dart';
+import 'bootstrap/presentation/blocs/get_sections/get_sections_bloc.dart';
 import 'core/routes/router_builder.dart';
 import 'utils/dependencies_injection.dart';
 
@@ -47,6 +49,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => sl<GetProjectsBloc>(),
         ),
+        BlocProvider(
+          create: (context) => sl<CreateSectionsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<GetSectionsBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         title: 'Flutter Demo',
@@ -67,6 +75,31 @@ class MyApp extends StatelessWidget {
           // This works for code too, not just values: Most code changes can be
           // tested with just a hot reload.
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          textTheme: const TextTheme(
+            // Heading 1
+            displayLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            displayMedium: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+            displaySmall:
+                TextStyle(fontSize: 22, fontWeight: FontWeight.normal),
+            // Heading 2
+            headlineLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            headlineMedium:
+                TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            headlineSmall:
+                TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+            // Heading 3
+            titleLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+            titleSmall: TextStyle(fontSize: 16, fontWeight: FontWeight.w200),
+            // Heading 4
+            bodyLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            bodyMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+            bodySmall: TextStyle(fontSize: 14, fontWeight: FontWeight.w200),
+            // Heading 5
+            labelLarge: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            labelMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
+            labelSmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w200),
+          ),
           useMaterial3: true,
         ),
         routerConfig: router,

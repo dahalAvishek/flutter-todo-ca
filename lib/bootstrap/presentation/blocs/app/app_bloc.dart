@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecases.dart';
-import '../../../domain/usecases/create_project.dart';
 import '../../../domain/usecases/get_app.dart';
 
 part 'app_event.dart';

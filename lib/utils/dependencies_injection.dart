@@ -1,17 +1,24 @@
 import 'package:flutter_todo/bootstrap/domain/usecases/create_project.dart';
 import 'package:flutter_todo/bootstrap/domain/usecases/get_app.dart';
 import 'package:flutter_todo/bootstrap/domain/usecases/get_projects.dart';
+import 'package:flutter_todo/bootstrap/domain/usecases/get_sections.dart';
 import 'package:flutter_todo/bootstrap/presentation/blocs/get_projects/get_projects_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../bootstrap/data/repositories/app_repository_impl.dart';
 import '../bootstrap/data/repositories/projects_repositories_impl.dart';
+import '../bootstrap/data/repositories/section_repository_impl.dart';
+import '../bootstrap/data/source/Section_remote_source.dart';
 import '../bootstrap/data/source/app_local_source.dart';
 import '../bootstrap/data/source/projects_remote_source.dart';
 import '../bootstrap/domain/repositoires/app_repository.dart';
 import '../bootstrap/domain/repositoires/projects_repositories.dart';
+import '../bootstrap/domain/repositoires/sections_repository.dart';
+import '../bootstrap/domain/usecases/create_section.dart';
 import '../bootstrap/presentation/blocs/app/app_bloc.dart';
 import '../bootstrap/presentation/blocs/create_project/create_project_bloc.dart';
+import '../bootstrap/presentation/blocs/create_sections/create_sections_bloc.dart';
+import '../bootstrap/presentation/blocs/get_sections/get_sections_bloc.dart';
 import '../core/api/api_client.dart';
 import 'services/secure_storage.dart';
 
@@ -65,9 +72,10 @@ Future<void> _initSecureStorage() async {
 
 void _repositories() {
   sl.registerLazySingleton<ProjectsRepositories>(
-    () => ProjectsRepositoriesImpl(
-      source: sl(),
-    ),
+    () => ProjectsRepositoriesImpl(source: sl(), secureStorageMixin: sl()),
+  );
+  sl.registerLazySingleton<SectionsRepository>(
+    () => SectionsRepositoriesImpl(source: sl()),
   );
   sl.registerLazySingleton<AppRepository>(
     () => AppRepositoryImpl(
@@ -83,11 +91,16 @@ void _dataSources() {
   sl.registerLazySingleton<AppLocalSource>(
     () => AppLocalSourceImpl(sl()),
   );
+  sl.registerLazySingleton<SectionRemoteSource>(
+    () => SectionRemoteSourceImpl(sl(), sl()),
+  );
 }
 
 void _useCase() {
   sl.registerLazySingleton(() => CreateProject(sl()));
+  sl.registerLazySingleton(() => CreateSection(sl()));
   sl.registerLazySingleton(() => GetProjects(sl()));
+  sl.registerLazySingleton(() => GetSections(sl()));
   sl.registerLazySingleton(() => GetApp(sl()));
 }
 
@@ -95,6 +108,8 @@ void _blocs() {
   sl.registerFactory(() => AppBloc(sl()));
   sl.registerFactory(() => CreateProjectBloc(sl()));
   sl.registerFactory(() => GetProjectsBloc(sl()));
+  sl.registerFactory(() => GetSectionsBloc(sl()));
+  sl.registerFactory(() => CreateSectionsBloc(sl(), sl()));
 
   // sl.registerFactory(() => AddFavoriteBloc(sl()));
 }
