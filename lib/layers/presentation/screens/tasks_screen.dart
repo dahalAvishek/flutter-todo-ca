@@ -6,8 +6,8 @@ import '../../../bootstrap/presentation/blocs/get_sections/get_sections_bloc.dar
 import '../../../core/constants/app_colors.dart';
 import '../../../core/presentations/ui/spacer.dart';
 import '../../../core/presentations/widgets/button.dart';
-import '../wisgets/add_task_dialog.dart';
-import '../wisgets/section_card.dart';
+import '../widgets/add_task_dialog.dart';
+import '../widgets/section_card.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
@@ -79,6 +79,17 @@ class TasksScreen extends StatelessWidget {
                                             (section) => SizedBox(
                                               width: MediaQuery.sizeOf(context)
                                                   .width,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height -
+                                                  50 -
+                                                  (MediaQuery.of(context)
+                                                          .viewPadding
+                                                          .top +
+                                                      kToolbarHeight +
+                                                      MediaQuery.of(context)
+                                                          .padding
+                                                          .bottom),
                                               child: Gapper.screenPadding(
                                                 child: section.id != null
                                                     ? SectionCard(

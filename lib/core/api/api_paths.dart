@@ -6,4 +6,5 @@ class ApiPaths {
   static const String projectsUrl = "/projects";
   static const String sectionUrl = '/sections';
   static const String tasksUrl = '/tasks';
+  static const String commentUrl = '/comments';
 }

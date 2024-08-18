@@ -12,7 +12,6 @@ import 'bootstrap/presentation/blocs/get_sections/get_sections_bloc.dart';
 import 'core/constants/app_colors.dart';
 import 'core/routes/router_builder.dart';
 import 'layers/presentation/blocs/create_task/create_task_bloc.dart';
-import 'layers/presentation/blocs/get_tasks/get_tasks_bloc.dart';
 import 'utils/dependencies_injection.dart';
 
 void main() {
@@ -58,9 +57,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => sl<GetSectionsBloc>(),
         ),
-        BlocProvider(
-          create: (context) => sl<GetTasksBloc>(),
-        ),
+        // BlocProvider(
+        //   create: (context) => sl<GetTasksBloc>(),
+        // ),
         BlocProvider(
           create: (context) => sl<CreateTaskBloc>(),
         ),
