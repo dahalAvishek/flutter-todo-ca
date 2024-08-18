@@ -20,8 +20,8 @@ GetTasksParams _$GetTasksParamsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GetTasksParams {
-  @JsonKey(name: "project_id")
-  String get projectId => throw _privateConstructorUsedError;
+  @JsonKey(name: "section_id")
+  String get sectionId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $GetTasksParamsCopyWith<$Res> {
           GetTasksParams value, $Res Function(GetTasksParams) then) =
       _$GetTasksParamsCopyWithImpl<$Res, GetTasksParams>;
   @useResult
-  $Res call({@JsonKey(name: "project_id") String projectId});
+  $Res call({@JsonKey(name: "section_id") String sectionId});
 }
 
 /// @nodoc
@@ -51,12 +51,12 @@ class _$GetTasksParamsCopyWithImpl<$Res, $Val extends GetTasksParams>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? projectId = null,
+    Object? sectionId = null,
   }) {
     return _then(_value.copyWith(
-      projectId: null == projectId
-          ? _value.projectId
-          : projectId // ignore: cast_nullable_to_non_nullable
+      sectionId: null == sectionId
+          ? _value.sectionId
+          : sectionId // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -70,7 +70,7 @@ abstract class _$$GetTasksParamsImplCopyWith<$Res>
       __$$GetTasksParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "project_id") String projectId});
+  $Res call({@JsonKey(name: "section_id") String sectionId});
 }
 
 /// @nodoc
@@ -84,12 +84,12 @@ class __$$GetTasksParamsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? projectId = null,
+    Object? sectionId = null,
   }) {
     return _then(_$GetTasksParamsImpl(
-      projectId: null == projectId
-          ? _value.projectId
-          : projectId // ignore: cast_nullable_to_non_nullable
+      sectionId: null == sectionId
+          ? _value.sectionId
+          : sectionId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -99,18 +99,18 @@ class __$$GetTasksParamsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GetTasksParamsImpl implements _GetTasksParams {
   const _$GetTasksParamsImpl(
-      {@JsonKey(name: "project_id") required this.projectId});
+      {@JsonKey(name: "section_id") required this.sectionId});
 
   factory _$GetTasksParamsImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetTasksParamsImplFromJson(json);
 
   @override
-  @JsonKey(name: "project_id")
-  final String projectId;
+  @JsonKey(name: "section_id")
+  final String sectionId;
 
   @override
   String toString() {
-    return 'GetTasksParams(projectId: $projectId)';
+    return 'GetTasksParams(sectionId: $sectionId)';
   }
 
   @override
@@ -118,13 +118,13 @@ class _$GetTasksParamsImpl implements _GetTasksParams {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetTasksParamsImpl &&
-            (identical(other.projectId, projectId) ||
-                other.projectId == projectId));
+            (identical(other.sectionId, sectionId) ||
+                other.sectionId == sectionId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, projectId);
+  int get hashCode => Object.hash(runtimeType, sectionId);
 
   @JsonKey(ignore: true)
   @override
@@ -143,15 +143,15 @@ class _$GetTasksParamsImpl implements _GetTasksParams {
 
 abstract class _GetTasksParams implements GetTasksParams {
   const factory _GetTasksParams(
-          {@JsonKey(name: "project_id") required final String projectId}) =
+          {@JsonKey(name: "section_id") required final String sectionId}) =
       _$GetTasksParamsImpl;
 
   factory _GetTasksParams.fromJson(Map<String, dynamic> json) =
       _$GetTasksParamsImpl.fromJson;
 
   @override
-  @JsonKey(name: "project_id")
-  String get projectId;
+  @JsonKey(name: "section_id")
+  String get sectionId;
   @override
   @JsonKey(ignore: true)
   _$$GetTasksParamsImplCopyWith<_$GetTasksParamsImpl> get copyWith =>

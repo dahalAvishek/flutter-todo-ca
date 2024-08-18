@@ -23,7 +23,9 @@ import '../core/api/api_client.dart';
 import '../layers/data/repositories/tasks_repositories_impl.dart';
 import '../layers/data/source/task_remote_source.dart';
 import '../layers/domain/repositories/task_repository.dart';
+import '../layers/domain/usecases/create_task.dart';
 import '../layers/domain/usecases/get_tasks.dart';
+import '../layers/presentation/blocs/create_task/create_task_bloc.dart';
 import '../layers/presentation/blocs/get_tasks/get_tasks_bloc.dart';
 import 'services/secure_storage.dart';
 
@@ -114,6 +116,7 @@ void _useCase() {
   sl.registerLazySingleton(() => GetSections(sl()));
   sl.registerLazySingleton(() => GetApp(sl()));
   sl.registerLazySingleton(() => GetTasks(sl()));
+  sl.registerLazySingleton(() => CreateTask(sl()));
 }
 
 void _blocs() {
@@ -122,6 +125,8 @@ void _blocs() {
   sl.registerFactory(() => GetProjectsBloc(sl()));
   sl.registerFactory(() => GetSectionsBloc(sl()));
   sl.registerFactory(() => CreateSectionsBloc(sl(), sl()));
+  sl.registerFactory(() => CreateTaskBloc(sl(), sl()));
+
   sl.registerFactory(() => GetTasksBloc(sl()));
 
   // sl.registerFactory(() => AddFavoriteBloc(sl()));

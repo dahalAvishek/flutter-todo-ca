@@ -16,7 +16,7 @@ class GetTasksBloc extends Bloc<GetTasksEvent, GetTasksState> {
     on<_Attempt>((event, emit) async {
       emit(const _Loading());
       final data = await _getTasks
-          .call(GetTasksParams(projectId: event.params.projectId));
+          .call(GetTasksParams(sectionId: event.params.sectionId));
       data.fold((failure) {
         if (failure is ServerFailure) {
           emit(_Failure(failure.message ?? "Server Error!"));

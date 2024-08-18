@@ -26,7 +26,7 @@ class GetTasks
 @freezed
 class GetTasksParams with _$GetTasksParams {
   const factory GetTasksParams({
-    @JsonKey(name: "project_id") required String projectId,
+    @JsonKey(name: "section_id") required String sectionId,
   }) = _GetTasksParams;
 
   factory GetTasksParams.fromJson(Map<String, dynamic> json) =>
