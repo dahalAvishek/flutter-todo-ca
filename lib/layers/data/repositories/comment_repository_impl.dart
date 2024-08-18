@@ -3,6 +3,7 @@ import 'package:flutter_todo/layers/domain/entities/comment_entity.dart';
 
 import '../../../core/error/failures.dart';
 import '../../domain/repositories/comment_respository.dart';
+import '../../domain/usecases/create_comment.dart';
 import '../../domain/usecases/get_comments.dart';
 import '../source/comment_remote_source.dart';
 
@@ -20,12 +21,12 @@ class CommentRepositoryImpl implements CommentRepository {
     });
   }
 
-  // @override
-  // Future<Either<Failure, TaskEntity>> createTask(
-  //     CreateTaskParams params) async {
-  //   final response = await source.createTask(params);
+  @override
+  Future<Either<Failure, CommentEntity>> createComment(
+      CreateCommentParams params) async {
+    final response = await source.createComment(params);
 
-  //   return response.fold(
-  //       (failure) => Left(failure), (result) => Right(result.toEntity()));
-  // }
+    return response.fold(
+        (failure) => Left(failure), (result) => Right(result.toEntity()));
+  }
 }

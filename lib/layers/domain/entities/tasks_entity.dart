@@ -9,6 +9,7 @@ class TaskEntity with _$TaskEntity {
     String? projectId,
     String? sectionId,
     int? order,
+    int? commentCount,
     String? content,
     String? description,
     String? createdAt,

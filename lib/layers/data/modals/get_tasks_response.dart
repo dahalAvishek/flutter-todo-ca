@@ -21,6 +21,7 @@ class GetTasksResponse with _$GetTasksResponse {
               (e) => TaskEntity(
                   id: e.id,
                   content: e.content,
+                  commentCount: e.commentCount,
                   createdAt: e.createdAt,
                   description: e.description,
                   order: e.order,

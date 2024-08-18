@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/core/helpers/extensions/date_extensions.dart';
-import 'package:flutter_todo/core/presentations/widgets/add_on_input_field.dart';
 
 import '../../../core/constants/ui_constants.dart';
 import '../../../core/presentations/ui/spacer.dart';
 import '../../../core/presentations/widgets/button.dart';
-import '../../../utils/dependencies_injection.dart';
 import '../../domain/entities/tasks_entity.dart';
-import '../blocs/get_comments/get_comments_bloc.dart';
+import 'comments_section.dart';
 
 class TaskCard extends StatefulWidget {
   final TaskEntity task;
@@ -20,6 +17,7 @@ class TaskCard extends StatefulWidget {
 
 class _TaskCardState extends State<TaskCard> {
   bool showComments = false;
+  final TextEditingController _commentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -72,7 +70,7 @@ class _TaskCardState extends State<TaskCard> {
                       ),
                       Gapper.h2xmGap(),
                       Text(
-                        "2",
+                        widget.task.commentCount.toString() ?? '',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Theme.of(context).colorScheme.onSecondary),
                       ),
@@ -123,66 +121,11 @@ class _TaskCardState extends State<TaskCard> {
                 ],
               ),
             ),
-            showComments && widget.task.id != null
-                ? BlocProvider(
-                    create: (context) => GetCommentsBloc(sl())
-                      ..add(GetCommentsEvent.attempt(taskId: widget.task.id!)),
-                    child: BlocBuilder<GetCommentsBloc, GetCommentsState>(
-                      builder: (context, state) {
-                        return state.mapOrNull(
-                              success: (value) => ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  maxHeight: 200,
-                                ),
-                                child: SingleChildScrollView(
-                                    child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Divider(),
-                                    if (widget.task.id != null)
-                                      ...value.comments?.comments
-                                              ?.map((comment) => Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Gapper.vxmGap(),
-                                                      Text(comment.content ??
-                                                          ""),
-                                                    ],
-                                                  )) ??
-                                          [],
-                                    Gapper.vxmGap(),
-                                    AddOnInputField(
-                                      verticalTextPadding: 8,
-                                      suffixWidget: InkWell(
-                                        onTap: () {},
-                                        child: Icon(
-                                          Icons.send,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onPrimary
-                                              .withOpacity(0.5),
-                                        ),
-                                      ),
-                                      borderColor:
-                                          Theme.of(context).colorScheme.outline,
-                                    )
-                                  ],
-                                )),
-                              ),
-                              loading: (value) => Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Divider(),
-                                  Gapper.vxmGap(),
-                                  const Text("Loading...")
-                                ],
-                              ),
-                            ) ??
-                            const SizedBox();
-                      },
-                    ),
+            widget.task.id != null
+                ? CommentsSection(
+                    widget: widget,
+                    commentController: _commentController,
+                    showComments: showComments,
                   )
                 : const SizedBox()
           ],

@@ -26,9 +26,11 @@ import '../layers/data/source/comment_remote_source.dart';
 import '../layers/data/source/task_remote_source.dart';
 import '../layers/domain/repositories/comment_respository.dart';
 import '../layers/domain/repositories/task_repository.dart';
+import '../layers/domain/usecases/create_comment.dart';
 import '../layers/domain/usecases/create_task.dart';
 import '../layers/domain/usecases/get_comments.dart';
 import '../layers/domain/usecases/get_tasks.dart';
+import '../layers/presentation/blocs/create_comment/create_comment_bloc.dart';
 import '../layers/presentation/blocs/create_task/create_task_bloc.dart';
 import 'services/secure_storage.dart';
 
@@ -129,6 +131,7 @@ void _useCase() {
   sl.registerLazySingleton(() => GetTasks(sl()));
   sl.registerLazySingleton(() => CreateTask(sl()));
   sl.registerLazySingleton(() => GetComments(sl()));
+  sl.registerLazySingleton(() => CreateComment(sl()));
 }
 
 void _blocs() {
@@ -138,6 +141,8 @@ void _blocs() {
   sl.registerFactory(() => GetSectionsBloc(sl()));
   sl.registerFactory(() => CreateSectionsBloc(sl(), sl()));
   sl.registerFactory(() => CreateTaskBloc(sl(), sl()));
+  sl.registerFactory(() => CreateCommentBloc(sl()));
+
   // sl.registerFactory(() => GetTasksBloc(sl()));
 
   // sl.registerFactory(() => AddFavoriteBloc(sl()));

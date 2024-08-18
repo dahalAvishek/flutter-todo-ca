@@ -20,6 +20,7 @@ mixin _$TaskEntity {
   String? get projectId => throw _privateConstructorUsedError;
   String? get sectionId => throw _privateConstructorUsedError;
   int? get order => throw _privateConstructorUsedError;
+  int? get commentCount => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $TaskEntityCopyWith<$Res> {
       String? projectId,
       String? sectionId,
       int? order,
+      int? commentCount,
       String? content,
       String? description,
       String? createdAt});
@@ -62,6 +64,7 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
     Object? projectId = freezed,
     Object? sectionId = freezed,
     Object? order = freezed,
+    Object? commentCount = freezed,
     Object? content = freezed,
     Object? description = freezed,
     Object? createdAt = freezed,
@@ -82,6 +85,10 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
       order: freezed == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
+              as int?,
+      commentCount: freezed == commentCount
+          ? _value.commentCount
+          : commentCount // ignore: cast_nullable_to_non_nullable
               as int?,
       content: freezed == content
           ? _value.content
@@ -112,6 +119,7 @@ abstract class _$$TaskEntityImplCopyWith<$Res>
       String? projectId,
       String? sectionId,
       int? order,
+      int? commentCount,
       String? content,
       String? description,
       String? createdAt});
@@ -132,6 +140,7 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
     Object? projectId = freezed,
     Object? sectionId = freezed,
     Object? order = freezed,
+    Object? commentCount = freezed,
     Object? content = freezed,
     Object? description = freezed,
     Object? createdAt = freezed,
@@ -152,6 +161,10 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
       order: freezed == order
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
+              as int?,
+      commentCount: freezed == commentCount
+          ? _value.commentCount
+          : commentCount // ignore: cast_nullable_to_non_nullable
               as int?,
       content: freezed == content
           ? _value.content
@@ -177,6 +190,7 @@ class _$TaskEntityImpl implements _TaskEntity {
       this.projectId,
       this.sectionId,
       this.order,
+      this.commentCount,
       this.content,
       this.description,
       this.createdAt});
@@ -190,6 +204,8 @@ class _$TaskEntityImpl implements _TaskEntity {
   @override
   final int? order;
   @override
+  final int? commentCount;
+  @override
   final String? content;
   @override
   final String? description;
@@ -198,7 +214,7 @@ class _$TaskEntityImpl implements _TaskEntity {
 
   @override
   String toString() {
-    return 'TaskEntity(id: $id, projectId: $projectId, sectionId: $sectionId, order: $order, content: $content, description: $description, createdAt: $createdAt)';
+    return 'TaskEntity(id: $id, projectId: $projectId, sectionId: $sectionId, order: $order, commentCount: $commentCount, content: $content, description: $description, createdAt: $createdAt)';
   }
 
   @override
@@ -212,6 +228,8 @@ class _$TaskEntityImpl implements _TaskEntity {
             (identical(other.sectionId, sectionId) ||
                 other.sectionId == sectionId) &&
             (identical(other.order, order) || other.order == order) &&
+            (identical(other.commentCount, commentCount) ||
+                other.commentCount == commentCount) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -221,7 +239,7 @@ class _$TaskEntityImpl implements _TaskEntity {
 
   @override
   int get hashCode => Object.hash(runtimeType, id, projectId, sectionId, order,
-      content, description, createdAt);
+      commentCount, content, description, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -236,6 +254,7 @@ abstract class _TaskEntity implements TaskEntity {
       final String? projectId,
       final String? sectionId,
       final int? order,
+      final int? commentCount,
       final String? content,
       final String? description,
       final String? createdAt}) = _$TaskEntityImpl;
@@ -248,6 +267,8 @@ abstract class _TaskEntity implements TaskEntity {
   String? get sectionId;
   @override
   int? get order;
+  @override
+  int? get commentCount;
   @override
   String? get content;
   @override

@@ -87,7 +87,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                           "Add Task",
                           style: TextStyle(
                               color:
-                                  _formKey.currentState?.validate() == null &&
+                                  _formKey.currentState?.validate() != null &&
                                           _formKey.currentState!.validate()
                                       ? Theme.of(context).colorScheme.onSurface
                                       : Theme.of(context)
