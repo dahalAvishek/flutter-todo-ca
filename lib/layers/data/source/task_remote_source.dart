@@ -30,7 +30,7 @@ class TaskRemoteSourceImpl implements TaskRemoteSource {
     String? projectId =
         await _secureStorageMixin.getValue(SecureStorageKeys.projectId);
     final response = await _client.getRequest(
-      "${ApiPaths.tasksUrl}?project_id=$projectId&?section_id=${params.sectionId}",
+      "${ApiPaths.tasksUrl}?section_id=${params.sectionId}",
       converter: (response) => GetTasksResponse.fromJson(response as List),
     );
     return response;
