@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/layers/domain/entities/tasks_entity.dart';
 
 import '../../../core/constants/ui_constants.dart';
-import '../../../core/presentations/gapped_list.dart';
 import '../../../utils/dependencies_injection.dart';
 import '../../domain/usecases/get_tasks.dart';
 import '../blocs/get_tasks/get_tasks_bloc.dart';
@@ -86,48 +85,41 @@ class _SectionCardState extends State<SectionCard> {
                   );
                 }
 
-                return SizedBox(
-                  height: double.maxFinite,
-                  child: GappedList(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      gap: UIConstants.padding,
-                      direction: Axis.vertical,
-                      children: [
-                        Text(
-                          widget.sectionName ?? '',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(fontWeight: FontWeight.w700),
+                return Expanded(
+                  child: SizedBox(
+                    width: MediaQuery.sizeOf(context).width - 80,
+                    height: double.maxFinite,
+                    child: ReorderableListView(
+                        header: Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: UIConstants.minPadding),
+                          child: Text(
+                            widget.sectionName ?? '',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
                         ),
-                        SizedBox(
-                          width: MediaQuery.sizeOf(context).width - 40,
-                          height: MediaQuery.of(context).size.height -
-                              90 -
-                              (MediaQuery.of(context).viewPadding.top +
-                                  kToolbarHeight +
-                                  MediaQuery.of(context).padding.bottom),
-                          child: ReorderableListView(
-                              scrollDirection: Axis.vertical,
-                              physics: const BouncingScrollPhysics(),
-                              proxyDecorator: proxyDecorator,
-                              onReorder: (int oldIndex, int newIndex) {
-                                if (_items == null) return;
-                                setState(() {
-                                  if (oldIndex < newIndex) {
-                                    newIndex -= 1;
-                                  }
-                                  final TaskCard task =
-                                      cards.removeAt(oldIndex);
-                                  cards.insert(newIndex, task);
-                                  final int item = _items!.removeAt(oldIndex);
-                                  _items!.insert(newIndex, item);
-                                  log("$_items");
-                                });
-                              },
-                              children: cards ?? []),
-                        )
-                      ]),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        physics: const BouncingScrollPhysics(),
+                        proxyDecorator: proxyDecorator,
+                        onReorder: (int oldIndex, int newIndex) {
+                          if (_items == null) return;
+                          setState(() {
+                            if (oldIndex < newIndex) {
+                              newIndex -= 1;
+                            }
+                            final TaskCard task = cards.removeAt(oldIndex);
+                            cards.insert(newIndex, task);
+                            final int item = _items!.removeAt(oldIndex);
+                            _items!.insert(newIndex, item);
+                            log("$_items");
+                          });
+                        },
+                        children: cards ?? []),
+                  ),
                 );
               }) ??
               const SizedBox();

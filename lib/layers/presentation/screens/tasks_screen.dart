@@ -68,31 +68,36 @@ class TasksScreen extends StatelessWidget {
                       success: (value) => SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             physics: const AlwaysScrollableScrollPhysics(),
-                            child: Column(
-                              children: [
-                                Gapper.vGap(),
-                                Expanded(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: value.sections?.sections
-                                            ?.map(
-                                              (section) => Gapper.screenPadding(
-                                                child: section.id != null
-                                                    ? SectionCard(
-                                                        sectionName:
-                                                            section.name,
-                                                        sectionId: section.id!,
-                                                      )
-                                                    : const Text(
-                                                        "No section found"),
-                                              ),
-                                            )
-                                            .toList() ??
-                                        [],
+                            child: SizedBox(
+                              height: double.maxFinite,
+                              child: Column(
+                                children: [
+                                  Gapper.vGap(),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: value.sections?.sections
+                                              ?.map(
+                                                (section) =>
+                                                    Gapper.screenPadding(
+                                                  child: section.id != null
+                                                      ? SectionCard(
+                                                          sectionName:
+                                                              section.name,
+                                                          sectionId:
+                                                              section.id!,
+                                                        )
+                                                      : const Text(
+                                                          "No section found"),
+                                                ),
+                                              )
+                                              .toList() ??
+                                          [],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           )) ??
                   const SizedBox();
