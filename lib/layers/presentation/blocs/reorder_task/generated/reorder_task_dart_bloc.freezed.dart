@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../get_tasks_bloc.dart';
+part of '../reorder_task_dart_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,21 +15,21 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$GetTasksEvent {
-  GetTasksParams get params => throw _privateConstructorUsedError;
+mixin _$ReorderTaskDartEvent {
+  ReorderTasksParams get params => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(GetTasksParams params) attempt,
+    required TResult Function(ReorderTasksParams params) attempt,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(GetTasksParams params)? attempt,
+    TResult? Function(ReorderTasksParams params)? attempt,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(GetTasksParams params)? attempt,
+    TResult Function(ReorderTasksParams params)? attempt,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,25 +51,26 @@ mixin _$GetTasksEvent {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $GetTasksEventCopyWith<GetTasksEvent> get copyWith =>
+  $ReorderTaskDartEventCopyWith<ReorderTaskDartEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetTasksEventCopyWith<$Res> {
-  factory $GetTasksEventCopyWith(
-          GetTasksEvent value, $Res Function(GetTasksEvent) then) =
-      _$GetTasksEventCopyWithImpl<$Res, GetTasksEvent>;
+abstract class $ReorderTaskDartEventCopyWith<$Res> {
+  factory $ReorderTaskDartEventCopyWith(ReorderTaskDartEvent value,
+          $Res Function(ReorderTaskDartEvent) then) =
+      _$ReorderTaskDartEventCopyWithImpl<$Res, ReorderTaskDartEvent>;
   @useResult
-  $Res call({GetTasksParams params});
+  $Res call({ReorderTasksParams params});
 
-  $GetTasksParamsCopyWith<$Res> get params;
+  $ReorderTasksParamsCopyWith<$Res> get params;
 }
 
 /// @nodoc
-class _$GetTasksEventCopyWithImpl<$Res, $Val extends GetTasksEvent>
-    implements $GetTasksEventCopyWith<$Res> {
-  _$GetTasksEventCopyWithImpl(this._value, this._then);
+class _$ReorderTaskDartEventCopyWithImpl<$Res,
+        $Val extends ReorderTaskDartEvent>
+    implements $ReorderTaskDartEventCopyWith<$Res> {
+  _$ReorderTaskDartEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -85,14 +86,14 @@ class _$GetTasksEventCopyWithImpl<$Res, $Val extends GetTasksEvent>
       params: null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
-              as GetTasksParams,
+              as ReorderTasksParams,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $GetTasksParamsCopyWith<$Res> get params {
-    return $GetTasksParamsCopyWith<$Res>(_value.params, (value) {
+  $ReorderTasksParamsCopyWith<$Res> get params {
+    return $ReorderTasksParamsCopyWith<$Res>(_value.params, (value) {
       return _then(_value.copyWith(params: value) as $Val);
     });
   }
@@ -100,21 +101,21 @@ class _$GetTasksEventCopyWithImpl<$Res, $Val extends GetTasksEvent>
 
 /// @nodoc
 abstract class _$$AttemptImplCopyWith<$Res>
-    implements $GetTasksEventCopyWith<$Res> {
+    implements $ReorderTaskDartEventCopyWith<$Res> {
   factory _$$AttemptImplCopyWith(
           _$AttemptImpl value, $Res Function(_$AttemptImpl) then) =
       __$$AttemptImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({GetTasksParams params});
+  $Res call({ReorderTasksParams params});
 
   @override
-  $GetTasksParamsCopyWith<$Res> get params;
+  $ReorderTasksParamsCopyWith<$Res> get params;
 }
 
 /// @nodoc
 class __$$AttemptImplCopyWithImpl<$Res>
-    extends _$GetTasksEventCopyWithImpl<$Res, _$AttemptImpl>
+    extends _$ReorderTaskDartEventCopyWithImpl<$Res, _$AttemptImpl>
     implements _$$AttemptImplCopyWith<$Res> {
   __$$AttemptImplCopyWithImpl(
       _$AttemptImpl _value, $Res Function(_$AttemptImpl) _then)
@@ -129,7 +130,7 @@ class __$$AttemptImplCopyWithImpl<$Res>
       null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
-              as GetTasksParams,
+              as ReorderTasksParams,
     ));
   }
 }
@@ -140,11 +141,11 @@ class _$AttemptImpl implements _Attempt {
   const _$AttemptImpl(this.params);
 
   @override
-  final GetTasksParams params;
+  final ReorderTasksParams params;
 
   @override
   String toString() {
-    return 'GetTasksEvent.attempt(params: $params)';
+    return 'ReorderTaskDartEvent.attempt(params: $params)';
   }
 
   @override
@@ -167,7 +168,7 @@ class _$AttemptImpl implements _Attempt {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(GetTasksParams params) attempt,
+    required TResult Function(ReorderTasksParams params) attempt,
   }) {
     return attempt(params);
   }
@@ -175,7 +176,7 @@ class _$AttemptImpl implements _Attempt {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(GetTasksParams params)? attempt,
+    TResult? Function(ReorderTasksParams params)? attempt,
   }) {
     return attempt?.call(params);
   }
@@ -183,7 +184,7 @@ class _$AttemptImpl implements _Attempt {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(GetTasksParams params)? attempt,
+    TResult Function(ReorderTasksParams params)? attempt,
     required TResult orElse(),
   }) {
     if (attempt != null) {
@@ -221,11 +222,11 @@ class _$AttemptImpl implements _Attempt {
   }
 }
 
-abstract class _Attempt implements GetTasksEvent {
-  const factory _Attempt(final GetTasksParams params) = _$AttemptImpl;
+abstract class _Attempt implements ReorderTaskDartEvent {
+  const factory _Attempt(final ReorderTasksParams params) = _$AttemptImpl;
 
   @override
-  GetTasksParams get params;
+  ReorderTasksParams get params;
   @override
   @JsonKey(ignore: true)
   _$$AttemptImplCopyWith<_$AttemptImpl> get copyWith =>
@@ -233,30 +234,29 @@ abstract class _Attempt implements GetTasksEvent {
 }
 
 /// @nodoc
-mixin _$GetTasksState {
-  TasksEntity get tasks => throw _privateConstructorUsedError;
+mixin _$ReorderTaskDartState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TasksEntity tasks) initial,
-    required TResult Function(TasksEntity tasks) loading,
-    required TResult Function(TasksEntity tasks) success,
-    required TResult Function(TasksEntity tasks, String message) failure,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) success,
+    required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TasksEntity tasks)? initial,
-    TResult? Function(TasksEntity tasks)? loading,
-    TResult? Function(TasksEntity tasks)? success,
-    TResult? Function(TasksEntity tasks, String message)? failure,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? success,
+    TResult? Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TasksEntity tasks)? initial,
-    TResult Function(TasksEntity tasks)? loading,
-    TResult Function(TasksEntity tasks)? success,
-    TResult Function(TasksEntity tasks, String message)? failure,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? success,
+    TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -285,154 +285,95 @@ mixin _$GetTasksState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $GetTasksStateCopyWith<GetTasksState> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetTasksStateCopyWith<$Res> {
-  factory $GetTasksStateCopyWith(
-          GetTasksState value, $Res Function(GetTasksState) then) =
-      _$GetTasksStateCopyWithImpl<$Res, GetTasksState>;
-  @useResult
-  $Res call({TasksEntity tasks});
-
-  $TasksEntityCopyWith<$Res> get tasks;
+abstract class $ReorderTaskDartStateCopyWith<$Res> {
+  factory $ReorderTaskDartStateCopyWith(ReorderTaskDartState value,
+          $Res Function(ReorderTaskDartState) then) =
+      _$ReorderTaskDartStateCopyWithImpl<$Res, ReorderTaskDartState>;
 }
 
 /// @nodoc
-class _$GetTasksStateCopyWithImpl<$Res, $Val extends GetTasksState>
-    implements $GetTasksStateCopyWith<$Res> {
-  _$GetTasksStateCopyWithImpl(this._value, this._then);
+class _$ReorderTaskDartStateCopyWithImpl<$Res,
+        $Val extends ReorderTaskDartState>
+    implements $ReorderTaskDartStateCopyWith<$Res> {
+  _$ReorderTaskDartStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tasks = null,
-  }) {
-    return _then(_value.copyWith(
-      tasks: null == tasks
-          ? _value.tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as TasksEntity,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TasksEntityCopyWith<$Res> get tasks {
-    return $TasksEntityCopyWith<$Res>(_value.tasks, (value) {
-      return _then(_value.copyWith(tasks: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res>
-    implements $GetTasksStateCopyWith<$Res> {
+abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({TasksEntity tasks});
-
-  @override
-  $TasksEntityCopyWith<$Res> get tasks;
 }
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$GetTasksStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ReorderTaskDartStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tasks = null,
-  }) {
-    return _then(_$InitialImpl(
-      null == tasks
-          ? _value.tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as TasksEntity,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl(this.tasks);
-
-  @override
-  final TasksEntity tasks;
+  const _$InitialImpl();
 
   @override
   String toString() {
-    return 'GetTasksState.initial(tasks: $tasks)';
+    return 'ReorderTaskDartState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$InitialImpl &&
-            (identical(other.tasks, tasks) || other.tasks == tasks));
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tasks);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TasksEntity tasks) initial,
-    required TResult Function(TasksEntity tasks) loading,
-    required TResult Function(TasksEntity tasks) success,
-    required TResult Function(TasksEntity tasks, String message) failure,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) success,
+    required TResult Function(String message) failure,
   }) {
-    return initial(tasks);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TasksEntity tasks)? initial,
-    TResult? Function(TasksEntity tasks)? loading,
-    TResult? Function(TasksEntity tasks)? success,
-    TResult? Function(TasksEntity tasks, String message)? failure,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? success,
+    TResult? Function(String message)? failure,
   }) {
-    return initial?.call(tasks);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TasksEntity tasks)? initial,
-    TResult Function(TasksEntity tasks)? loading,
-    TResult Function(TasksEntity tasks)? success,
-    TResult Function(TasksEntity tasks, String message)? failure,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? success,
+    TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(tasks);
+      return initial();
     }
     return orElse();
   }
@@ -475,116 +416,78 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements GetTasksState {
-  const factory _Initial(final TasksEntity tasks) = _$InitialImpl;
-
-  @override
-  TasksEntity get tasks;
-  @override
-  @JsonKey(ignore: true)
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class _Initial implements ReorderTaskDartState {
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res>
-    implements $GetTasksStateCopyWith<$Res> {
+abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
           _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
       __$$LoadingImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({TasksEntity tasks});
-
-  @override
-  $TasksEntityCopyWith<$Res> get tasks;
 }
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$GetTasksStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$ReorderTaskDartStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tasks = null,
-  }) {
-    return _then(_$LoadingImpl(
-      null == tasks
-          ? _value.tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as TasksEntity,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl(this.tasks);
-
-  @override
-  final TasksEntity tasks;
+  const _$LoadingImpl();
 
   @override
   String toString() {
-    return 'GetTasksState.loading(tasks: $tasks)';
+    return 'ReorderTaskDartState.loading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoadingImpl &&
-            (identical(other.tasks, tasks) || other.tasks == tasks));
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tasks);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
-      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TasksEntity tasks) initial,
-    required TResult Function(TasksEntity tasks) loading,
-    required TResult Function(TasksEntity tasks) success,
-    required TResult Function(TasksEntity tasks, String message) failure,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) success,
+    required TResult Function(String message) failure,
   }) {
-    return loading(tasks);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TasksEntity tasks)? initial,
-    TResult? Function(TasksEntity tasks)? loading,
-    TResult? Function(TasksEntity tasks)? success,
-    TResult? Function(TasksEntity tasks, String message)? failure,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? success,
+    TResult? Function(String message)? failure,
   }) {
-    return loading?.call(tasks);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TasksEntity tasks)? initial,
-    TResult Function(TasksEntity tasks)? loading,
-    TResult Function(TasksEntity tasks)? success,
-    TResult Function(TasksEntity tasks, String message)? failure,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? success,
+    TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(tasks);
+      return loading();
     }
     return orElse();
   }
@@ -627,34 +530,22 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements GetTasksState {
-  const factory _Loading(final TasksEntity tasks) = _$LoadingImpl;
-
-  @override
-  TasksEntity get tasks;
-  @override
-  @JsonKey(ignore: true)
-  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class _Loading implements ReorderTaskDartState {
+  const factory _Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$SuccessImplCopyWith<$Res>
-    implements $GetTasksStateCopyWith<$Res> {
+abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({TasksEntity tasks});
-
-  @override
-  $TasksEntityCopyWith<$Res> get tasks;
+  $Res call({String message});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$GetTasksStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$ReorderTaskDartStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
@@ -663,13 +554,13 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tasks = null,
+    Object? message = null,
   }) {
     return _then(_$SuccessImpl(
-      null == tasks
-          ? _value.tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as TasksEntity,
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -677,14 +568,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(this.tasks);
+  const _$SuccessImpl(this.message);
 
   @override
-  final TasksEntity tasks;
+  final String message;
 
   @override
   String toString() {
-    return 'GetTasksState.success(tasks: $tasks)';
+    return 'ReorderTaskDartState.success(message: $message)';
   }
 
   @override
@@ -692,11 +583,11 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.tasks, tasks) || other.tasks == tasks));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tasks);
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
@@ -707,36 +598,36 @@ class _$SuccessImpl implements _Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TasksEntity tasks) initial,
-    required TResult Function(TasksEntity tasks) loading,
-    required TResult Function(TasksEntity tasks) success,
-    required TResult Function(TasksEntity tasks, String message) failure,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) success,
+    required TResult Function(String message) failure,
   }) {
-    return success(tasks);
+    return success(message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TasksEntity tasks)? initial,
-    TResult? Function(TasksEntity tasks)? loading,
-    TResult? Function(TasksEntity tasks)? success,
-    TResult? Function(TasksEntity tasks, String message)? failure,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? success,
+    TResult? Function(String message)? failure,
   }) {
-    return success?.call(tasks);
+    return success?.call(message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TasksEntity tasks)? initial,
-    TResult Function(TasksEntity tasks)? loading,
-    TResult Function(TasksEntity tasks)? success,
-    TResult Function(TasksEntity tasks, String message)? failure,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? success,
+    TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(tasks);
+      return success(message);
     }
     return orElse();
   }
@@ -779,34 +670,27 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements GetTasksState {
-  const factory _Success(final TasksEntity tasks) = _$SuccessImpl;
+abstract class _Success implements ReorderTaskDartState {
+  const factory _Success(final String message) = _$SuccessImpl;
 
-  @override
-  TasksEntity get tasks;
-  @override
+  String get message;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FailureImplCopyWith<$Res>
-    implements $GetTasksStateCopyWith<$Res> {
+abstract class _$$FailureImplCopyWith<$Res> {
   factory _$$FailureImplCopyWith(
           _$FailureImpl value, $Res Function(_$FailureImpl) then) =
       __$$FailureImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({TasksEntity tasks, String message});
-
-  @override
-  $TasksEntityCopyWith<$Res> get tasks;
+  $Res call({String message});
 }
 
 /// @nodoc
 class __$$FailureImplCopyWithImpl<$Res>
-    extends _$GetTasksStateCopyWithImpl<$Res, _$FailureImpl>
+    extends _$ReorderTaskDartStateCopyWithImpl<$Res, _$FailureImpl>
     implements _$$FailureImplCopyWith<$Res> {
   __$$FailureImplCopyWithImpl(
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
@@ -815,15 +699,10 @@ class __$$FailureImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tasks = null,
     Object? message = null,
   }) {
     return _then(_$FailureImpl(
-      tasks: null == tasks
-          ? _value.tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as TasksEntity,
-      message: null == message
+      null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
@@ -834,16 +713,14 @@ class __$$FailureImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FailureImpl implements _Failure {
-  const _$FailureImpl({required this.tasks, required this.message});
+  const _$FailureImpl(this.message);
 
-  @override
-  final TasksEntity tasks;
   @override
   final String message;
 
   @override
   String toString() {
-    return 'GetTasksState.failure(tasks: $tasks, message: $message)';
+    return 'ReorderTaskDartState.failure(message: $message)';
   }
 
   @override
@@ -851,12 +728,11 @@ class _$FailureImpl implements _Failure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FailureImpl &&
-            (identical(other.tasks, tasks) || other.tasks == tasks) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, tasks, message);
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
@@ -867,36 +743,36 @@ class _$FailureImpl implements _Failure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TasksEntity tasks) initial,
-    required TResult Function(TasksEntity tasks) loading,
-    required TResult Function(TasksEntity tasks) success,
-    required TResult Function(TasksEntity tasks, String message) failure,
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) success,
+    required TResult Function(String message) failure,
   }) {
-    return failure(tasks, message);
+    return failure(message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TasksEntity tasks)? initial,
-    TResult? Function(TasksEntity tasks)? loading,
-    TResult? Function(TasksEntity tasks)? success,
-    TResult? Function(TasksEntity tasks, String message)? failure,
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? success,
+    TResult? Function(String message)? failure,
   }) {
-    return failure?.call(tasks, message);
+    return failure?.call(message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TasksEntity tasks)? initial,
-    TResult Function(TasksEntity tasks)? loading,
-    TResult Function(TasksEntity tasks)? success,
-    TResult Function(TasksEntity tasks, String message)? failure,
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? success,
+    TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure(tasks, message);
+      return failure(message);
     }
     return orElse();
   }
@@ -939,15 +815,10 @@ class _$FailureImpl implements _Failure {
   }
 }
 
-abstract class _Failure implements GetTasksState {
-  const factory _Failure(
-      {required final TasksEntity tasks,
-      required final String message}) = _$FailureImpl;
+abstract class _Failure implements ReorderTaskDartState {
+  const factory _Failure(final String message) = _$FailureImpl;
 
-  @override
-  TasksEntity get tasks;
   String get message;
-  @override
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<_$FailureImpl> get copyWith =>
       throw _privateConstructorUsedError;

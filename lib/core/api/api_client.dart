@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:uuid/uuid.dart';
 
 import '../error/failures.dart';
 import 'api_interceptor.dart';
@@ -95,6 +96,49 @@ class ApiClient {
       String? requestName}) async {
     try {
       final response = await (await dio).post(url, data: data ?? formData);
+      if ((response.statusCode ?? 0) < 200 ||
+          (response.statusCode ?? 0) > 201) {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
+      }
+      return Right(converter(response.data));
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 422 &&
+          e.response != null &&
+          (e.response!.data as Map).containsKey("meta")) {
+        List validationErrors =
+            ((e.response!.data as Map)["meta"][0] as Map).entries.toList();
+        if (validationErrors.isEmpty) {
+          return const Left(
+              ValidationFailure(message: "Oops! Check your details again."));
+        } else {
+          return Left(ValidationFailure(
+              message:
+                  (validationErrors.first as MapEntry).value[0].toString()));
+        }
+      }
+      return Left(
+        ServerFailure(
+          message: e.response?.data['message'] as String? ?? e.message,
+        ),
+      );
+    }
+  }
+
+  Future<Either<Failure, T>> syncRequest<T>({
+    required String type,
+    required Map<String, dynamic> args,
+    required ResponseConverter<T> converter,
+  }) async {
+    try {
+      Map<String, dynamic> data = {
+        'commands': [
+          {"type": type, "uuid": const Uuid().v4(), "args": args}
+        ]
+      };
+      final response = await (await dio).post(ApiPaths.syncUrl, data: data);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(

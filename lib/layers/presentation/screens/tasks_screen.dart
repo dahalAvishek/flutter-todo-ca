@@ -71,26 +71,13 @@ class TasksScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 Gapper.vGap(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: value.sections?.sections
-                                          ?.map(
-                                            (section) => SizedBox(
-                                              width: MediaQuery.sizeOf(context)
-                                                  .width,
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height -
-                                                  50 -
-                                                  (MediaQuery.of(context)
-                                                          .viewPadding
-                                                          .top +
-                                                      kToolbarHeight +
-                                                      MediaQuery.of(context)
-                                                          .padding
-                                                          .bottom),
-                                              child: Gapper.screenPadding(
+                                Expanded(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: value.sections?.sections
+                                            ?.map(
+                                              (section) => Gapper.screenPadding(
                                                 child: section.id != null
                                                     ? SectionCard(
                                                         sectionName:
@@ -100,10 +87,10 @@ class TasksScreen extends StatelessWidget {
                                                     : const Text(
                                                         "No section found"),
                                               ),
-                                            ),
-                                          )
-                                          .toList() ??
-                                      [],
+                                            )
+                                            .toList() ??
+                                        [],
+                                  ),
                                 ),
                               ],
                             ),
