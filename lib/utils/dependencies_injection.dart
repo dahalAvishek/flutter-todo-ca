@@ -21,17 +21,28 @@ import '../bootstrap/presentation/blocs/create_sections/create_sections_bloc.dar
 import '../bootstrap/presentation/blocs/get_sections/get_sections_bloc.dart';
 import '../core/api/api_client.dart';
 import '../layers/data/repositories/comment_repository_impl.dart';
+import '../layers/data/repositories/sync_repository_impl.dart';
 import '../layers/data/repositories/tasks_repositories_impl.dart';
 import '../layers/data/source/comment_remote_source.dart';
+import '../layers/data/source/sync_remote_source.dart';
 import '../layers/data/source/task_remote_source.dart';
 import '../layers/domain/repositories/comment_respository.dart';
+import '../layers/domain/repositories/sync_repository.dart';
 import '../layers/domain/repositories/task_repository.dart';
 import '../layers/domain/usecases/create_comment.dart';
 import '../layers/domain/usecases/create_task.dart';
+import '../layers/domain/usecases/edit_task.dart';
 import '../layers/domain/usecases/get_comments.dart';
+import '../layers/domain/usecases/get_task.dart';
 import '../layers/domain/usecases/get_tasks.dart';
+import '../layers/domain/usecases/move_task.dart';
 import '../layers/presentation/blocs/create_comment/create_comment_bloc.dart';
 import '../layers/presentation/blocs/create_task/create_task_bloc.dart';
+import '../layers/presentation/blocs/edit_task/edit_task_bloc.dart';
+import '../layers/presentation/blocs/get_done/get_done_bloc.dart';
+import '../layers/presentation/blocs/get_in_progress/get_in_progress_bloc.dart';
+import '../layers/presentation/blocs/get_todo/get_todo_bloc.dart';
+import '../layers/presentation/blocs/move_task/move_task_bloc.dart';
 import 'services/secure_storage.dart';
 
 GetIt sl = GetIt.instance;
@@ -100,6 +111,11 @@ void _repositories() {
       appLocalSource: sl(),
     ),
   );
+  sl.registerLazySingleton<SyncRepository>(
+    () => SyncRepositoryImpl(
+      source: sl(),
+    ),
+  );
 }
 
 void _dataSources() {
@@ -120,6 +136,11 @@ void _dataSources() {
       sl(),
     ),
   );
+  sl.registerLazySingleton<SyncRemoteSource>(
+    () => SyncRemoteSourceImpl(
+      sl(),
+    ),
+  );
 }
 
 void _useCase() {
@@ -132,6 +153,9 @@ void _useCase() {
   sl.registerLazySingleton(() => CreateTask(sl()));
   sl.registerLazySingleton(() => GetComments(sl()));
   sl.registerLazySingleton(() => CreateComment(sl()));
+  sl.registerLazySingleton(() => MoveTask(sl()));
+  sl.registerLazySingleton(() => GetTask(sl()));
+  sl.registerLazySingleton(() => EditTask(sl()));
 }
 
 void _blocs() {
@@ -141,9 +165,14 @@ void _blocs() {
   sl.registerFactory(() => GetSectionsBloc(sl()));
   sl.registerFactory(() => CreateSectionsBloc(sl(), sl()));
   sl.registerFactory(() => CreateTaskBloc(sl(), sl()));
-  sl.registerFactory(() => CreateCommentBloc(sl()));
+  sl.registerFactory(() => EditTaskBloc(sl()));
 
-  // sl.registerFactory(() => GetTasksBloc(sl()));
+  sl.registerFactory(() => CreateCommentBloc(sl()));
+  sl.registerFactory(() => MoveTaskBloc(sl()));
+
+  sl.registerFactory(() => GetTodoBloc(sl()));
+  sl.registerFactory(() => GetInProgressBloc(sl()));
+  sl.registerFactory(() => GetDoneBloc(sl()));
 
   // sl.registerFactory(() => AddFavoriteBloc(sl()));
 }

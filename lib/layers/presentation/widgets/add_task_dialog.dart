@@ -6,12 +6,15 @@ import '../../../bootstrap/presentation/blocs/get_sections/get_sections_bloc.dar
 import '../../../core/presentations/widgets/button.dart';
 import '../../domain/usecases/get_tasks.dart';
 import '../blocs/create_task/create_task_bloc.dart';
+import '../blocs/edit_task/edit_task_bloc.dart';
 import '../blocs/get_tasks/get_tasks_bloc.dart';
 
 class AddTaskDialog extends StatefulWidget {
-  const AddTaskDialog({
-    super.key,
-  });
+  final String? name;
+  final String? description;
+  final String? taskId;
+
+  const AddTaskDialog({super.key, this.name, this.description, this.taskId});
 
   @override
   State<AddTaskDialog> createState() => _AddTaskDialogState();
@@ -19,11 +22,13 @@ class AddTaskDialog extends StatefulWidget {
 
 class _AddTaskDialogState extends State<AddTaskDialog> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController =
+        TextEditingController(text: widget.name);
+    final TextEditingController descriptionController =
+        TextEditingController(text: widget.description);
     return BlocBuilder<GetSectionsBloc, GetSectionsState>(
       builder: (context, state) {
         return state.mapOrNull(
@@ -38,7 +43,6 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                                   sectionId: getSectionsV
                                       .sections!.sections!.first.id!)));
                         }
-                        Navigator.pop(context);
                       },
                     );
                   },
@@ -52,7 +56,8 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                         children: [
                           const Text("Task Name"),
                           TextFormField(
-                            controller: _nameController,
+                            // initialValue: widget.name,
+                            controller: nameController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "Name required";
@@ -63,7 +68,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                           Gapper.vGap(),
                           const Text("Desctiption"),
                           TextFormField(
-                            controller: _descriptionController,
+                            controller: descriptionController,
                           ),
                         ],
                       ),
@@ -84,31 +89,40 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                       Button(
                         borderColor: Colors.transparent,
                         label: Text(
-                          "Add Task",
+                          widget.taskId == null ? "Add Task" : "Edit Task",
                           style: TextStyle(
-                              color:
-                                  _formKey.currentState?.validate() != null &&
-                                          _formKey.currentState!.validate()
-                                      ? Theme.of(context).colorScheme.onSurface
-                                      : Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary
-                                          .withOpacity(0.5)),
+                              color: Theme.of(context).colorScheme.onSurface),
                         ),
                         handleTap: () {
-                          if (_formKey.currentState?.validate() != null &&
-                              _formKey.currentState!.validate() &&
-                              getSectionsV.sections?.sections?.first.id !=
-                                  null) {
-                            context
-                                .read<CreateTaskBloc>()
-                                .add(CreateTaskEvent.attempt(
-                                  content: _nameController.text,
-                                  sectionId: getSectionsV
-                                      .sections!.sections!.first.id!,
-                                  description: _descriptionController.text,
-                                )); // Navigator.pop(context);
+                          if (widget.taskId == null) {
+                            if (_formKey.currentState?.validate() != null &&
+                                _formKey.currentState!.validate() &&
+                                getSectionsV.sections?.sections?.first.id !=
+                                    null) {
+                              context
+                                  .read<CreateTaskBloc>()
+                                  .add(CreateTaskEvent.attempt(
+                                    content: nameController.text,
+                                    sectionId: getSectionsV
+                                        .sections!.sections!.first.id!,
+                                    description: descriptionController.text,
+                                  )); // Navigator.pop(context);
+                            }
+                          } else {
+                            if (_formKey.currentState?.validate() != null &&
+                                _formKey.currentState!.validate() &&
+                                getSectionsV.sections?.sections?.first.id !=
+                                    null) {
+                              context
+                                  .read<EditTaskBloc>()
+                                  .add(EditTaskEvent.attempt(
+                                    content: nameController.text,
+                                    taskId: widget.taskId!,
+                                    description: descriptionController.text,
+                                  )); // Navigator.pop(context);
+                            }
                           }
+                          Navigator.pop(context);
                         },
                         width: 100,
                         height: 25,

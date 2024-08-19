@@ -3,16 +3,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/entities/tasks_entity.dart';
 import 'schemas/task.dart';
 
-part 'generated/create_task_response.freezed.dart';
+part 'generated/task_response.freezed.dart';
 
 @Freezed(fromJson: false, toJson: false)
-class CreateTasksResponse with _$CreateTasksResponse {
-  const CreateTasksResponse._();
+class TaskResponse with _$TaskResponse {
+  const TaskResponse._();
 
-  const factory CreateTasksResponse({Task? task}) = _CreateTasksResponse;
+  const factory TaskResponse({Task? task}) = _TaskResponse;
 
-  factory CreateTasksResponse.fromJson(Map<String, dynamic> json) =>
-      CreateTasksResponse(
+  factory TaskResponse.fromJson(Map<String, dynamic> json) => TaskResponse(
         task: Task.fromJson(json),
       );
 

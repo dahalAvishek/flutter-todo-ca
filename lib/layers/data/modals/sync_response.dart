@@ -8,12 +8,11 @@ part 'generated/sync_response.freezed.dart';
 class SyncResponse with _$SyncResponse {
   const SyncResponse._();
 
-  const factory SyncResponse({Map<String, String>? syncStatus}) = _SyncResponse;
+  const factory SyncResponse({bool? fullSync}) = _SyncResponse;
 
-  factory SyncResponse.fromJson(Map<String, Map<String, String>> json) =>
-      SyncResponse(
-        syncStatus: json["sync_status"],
+  factory SyncResponse.fromJson(Map<String, dynamic> json) => SyncResponse(
+        fullSync: json["full_sync"],
       );
 
-  SyncEntity toEntity() => SyncEntity(syncStatus: syncStatus);
+  SyncEntity toEntity() => SyncEntity(fullSync: fullSync);
 }

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SyncEntity {
-  Map<String, String>? get syncStatus => throw _privateConstructorUsedError;
+  bool? get fullSync => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SyncEntityCopyWith<SyncEntity> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $SyncEntityCopyWith<$Res> {
           SyncEntity value, $Res Function(SyncEntity) then) =
       _$SyncEntityCopyWithImpl<$Res, SyncEntity>;
   @useResult
-  $Res call({Map<String, String>? syncStatus});
+  $Res call({bool? fullSync});
 }
 
 /// @nodoc
@@ -45,13 +45,13 @@ class _$SyncEntityCopyWithImpl<$Res, $Val extends SyncEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? syncStatus = freezed,
+    Object? fullSync = freezed,
   }) {
     return _then(_value.copyWith(
-      syncStatus: freezed == syncStatus
-          ? _value.syncStatus
-          : syncStatus // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
+      fullSync: freezed == fullSync
+          ? _value.fullSync
+          : fullSync // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -64,7 +64,7 @@ abstract class _$$SyncEntityImplCopyWith<$Res>
       __$$SyncEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, String>? syncStatus});
+  $Res call({bool? fullSync});
 }
 
 /// @nodoc
@@ -78,13 +78,13 @@ class __$$SyncEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? syncStatus = freezed,
+    Object? fullSync = freezed,
   }) {
     return _then(_$SyncEntityImpl(
-      syncStatus: freezed == syncStatus
-          ? _value._syncStatus
-          : syncStatus // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
+      fullSync: freezed == fullSync
+          ? _value.fullSync
+          : fullSync // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -92,22 +92,14 @@ class __$$SyncEntityImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SyncEntityImpl implements _SyncEntity {
-  const _$SyncEntityImpl({final Map<String, String>? syncStatus})
-      : _syncStatus = syncStatus;
+  const _$SyncEntityImpl({this.fullSync});
 
-  final Map<String, String>? _syncStatus;
   @override
-  Map<String, String>? get syncStatus {
-    final value = _syncStatus;
-    if (value == null) return null;
-    if (_syncStatus is EqualUnmodifiableMapView) return _syncStatus;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
+  final bool? fullSync;
 
   @override
   String toString() {
-    return 'SyncEntity(syncStatus: $syncStatus)';
+    return 'SyncEntity(fullSync: $fullSync)';
   }
 
   @override
@@ -115,13 +107,12 @@ class _$SyncEntityImpl implements _SyncEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SyncEntityImpl &&
-            const DeepCollectionEquality()
-                .equals(other._syncStatus, _syncStatus));
+            (identical(other.fullSync, fullSync) ||
+                other.fullSync == fullSync));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_syncStatus));
+  int get hashCode => Object.hash(runtimeType, fullSync);
 
   @JsonKey(ignore: true)
   @override
@@ -131,11 +122,10 @@ class _$SyncEntityImpl implements _SyncEntity {
 }
 
 abstract class _SyncEntity implements SyncEntity {
-  const factory _SyncEntity({final Map<String, String>? syncStatus}) =
-      _$SyncEntityImpl;
+  const factory _SyncEntity({final bool? fullSync}) = _$SyncEntityImpl;
 
   @override
-  Map<String, String>? get syncStatus;
+  bool? get fullSync;
   @override
   @JsonKey(ignore: true)
   _$$SyncEntityImplCopyWith<_$SyncEntityImpl> get copyWith =>

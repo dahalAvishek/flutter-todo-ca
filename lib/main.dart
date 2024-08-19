@@ -13,6 +13,11 @@ import 'core/constants/app_colors.dart';
 import 'core/routes/router_builder.dart';
 import 'layers/presentation/blocs/create_comment/create_comment_bloc.dart';
 import 'layers/presentation/blocs/create_task/create_task_bloc.dart';
+import 'layers/presentation/blocs/edit_task/edit_task_bloc.dart';
+import 'layers/presentation/blocs/get_done/get_done_bloc.dart';
+import 'layers/presentation/blocs/get_in_progress/get_in_progress_bloc.dart';
+import 'layers/presentation/blocs/get_todo/get_todo_bloc.dart';
+import 'layers/presentation/blocs/move_task/move_task_bloc.dart';
 import 'utils/dependencies_injection.dart';
 
 void main() {
@@ -58,14 +63,26 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => sl<GetSectionsBloc>(),
         ),
-        // BlocProvider(
-        //   create: (context) => sl<GetTasksBloc>(),
-        // ),
+        BlocProvider(
+          create: (context) => sl<MoveTaskBloc>(),
+        ),
         BlocProvider(
           create: (context) => sl<CreateTaskBloc>(),
         ),
         BlocProvider(
+          create: (context) => sl<EditTaskBloc>(),
+        ),
+        BlocProvider(
           create: (context) => sl<CreateCommentBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<GetDoneBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<GetInProgressBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<GetTodoBloc>(),
         ),
       ],
       child: MaterialApp.router(

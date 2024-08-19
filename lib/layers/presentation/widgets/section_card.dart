@@ -1,21 +1,20 @@
-import 'dart:developer';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/layers/domain/entities/tasks_entity.dart';
 
-import '../../../core/constants/ui_constants.dart';
-import '../../../utils/dependencies_injection.dart';
-import '../../domain/usecases/get_tasks.dart';
-import '../blocs/get_tasks/get_tasks_bloc.dart';
+import '../../../bootstrap/domain/entities/section_entity.dart';
+import '../../../core/presentations/ui/spacer.dart';
 import 'task_card.dart';
 
 class SectionCard extends StatefulWidget {
   final String? sectionName;
   final String sectionId;
+  final List<SectionEntity> sections;
+  final List<TaskEntity> tasks;
+
   const SectionCard({
     this.sectionName,
+    required this.tasks,
+    required this.sections,
     required this.sectionId,
     super.key,
   });
@@ -25,105 +24,101 @@ class SectionCard extends StatefulWidget {
 }
 
 class _SectionCardState extends State<SectionCard> {
-  late List<int>? _items;
+  late List<TaskEntity>? _items;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetTasksBloc(sl())
-        ..add(
-            GetTasksEvent.attempt(GetTasksParams(sectionId: widget.sectionId))),
-      child: BlocBuilder<GetTasksBloc, GetTasksState>(
-        builder: (context, state) {
-          return state.mapOrNull(success: (tasksValue) {
-                _items = tasksValue.tasks.task
-                        ?.map((task) => task.order ?? 0)
-                        .toList() ??
-                    [];
-                // _items = List.generate(
-                //   tasksValue.tasks.task?.length ?? 0,
-                //   (index) => index,
-                // );
+    _items = widget.tasks.toList();
 
-                final List<TaskCard> cards = [
-                  for (int index = 0; index < (_items?.length ?? 0); index += 1)
-                    TaskCard(
-                      key: Key("$index"),
-                      task: tasksValue.tasks.task?[index] ?? const TaskEntity(),
-                    ),
-                ];
+    final List<TaskCard> cards = _items != null
+        ? _items!
+            .map(
+              (e) => TaskCard(
+                sections: widget.sections
+                    .where((section) => section.id != widget.sectionId)
+                    .toList(),
+                sectionId: widget.sectionId,
+                key: Key("${_items?.indexOf(e)}"),
+                task: e,
+              ),
+            )
+            .toList()
+        : [];
 
-                // final List<TaskCard> cards = List.generate(
-                //   tasksValue.tasks.task?.length ?? 0,
-                //   (index) => TaskCard(
-                //     key: Key("$index"),
-                //     task: tasksValue.tasks.task?[index] ?? const TaskEntity(),
-                //   ),
-                // );
+    // final List<TaskCard> cards = List.generate(
+    //   tasksValue.tasks.task?.length ?? 0,
+    //   (index) => TaskCard(
+    //     key: Key("$index"),
+    //     task: tasksValue.tasks.task?[index] ?? const TaskEntity(),
+    //   ),
+    // );
 
-                Widget proxyDecorator(
-                    Widget child, int index, Animation<double> animation) {
-                  return AnimatedBuilder(
-                    animation: animation,
-                    builder: (BuildContext context, Widget? child) {
-                      final double animValue =
-                          Curves.easeInOut.transform(animation.value);
-                      final double elevation = lerpDouble(4, 8, animValue)!;
-                      final double scale = lerpDouble(1, 1.02, animValue)!;
-                      return Transform.scale(
-                        scale: scale,
-                        // Create a Card based on the color and the content of the dragged one
-                        // and set its elevation to the animated value.
-                        child: TaskCard(
-                          elevation: elevation,
-                          task: tasksValue.tasks.task?[index] ??
-                              const TaskEntity(),
-                          key: Key("$index"),
-                        ),
-                      );
-                    },
-                    child: child,
-                  );
-                }
+    // Widget proxyDecorator(
+    //     Widget child, int index, Animation<double> animation) {
+    //   return AnimatedBuilder(
+    //     animation: animation,
+    //     builder: (BuildContext context, Widget? child) {
+    //       final double animValue = Curves.easeInOut.transform(animation.value);
+    //       final double elevation = lerpDouble(4, 8, animValue)!;
+    //       final double scale = lerpDouble(1, 1.02, animValue)!;
+    //       return Transform.scale(
+    //         scale: scale,
+    //         // Create a Card based on the color and the content of the dragged one
+    //         // and set its elevation to the animated value.
+    //         child: TaskCard(
+    //           sectionId: widget.tasks[index].sectionId ?? '',
+    //           elevation: elevation,
+    //           sections: widget.sections
+    //               .where((section) => section.id != widget.sectionId)
+    //               .toList(),
+    //           task: widget.tasks[index] ?? const TaskEntity(),
+    //           key: Key("$index"),
+    //         ),
+    //       );
+    //     },
+    //     child: child,
+    //   );
+    // }
 
-                return Expanded(
-                  child: SizedBox(
-                    width: MediaQuery.sizeOf(context).width - 80,
-                    height: double.maxFinite,
-                    child: ReorderableListView(
-                        header: Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: UIConstants.minPadding),
-                          child: Text(
-                            widget.sectionName ?? '',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: const BouncingScrollPhysics(),
-                        proxyDecorator: proxyDecorator,
-                        onReorder: (int oldIndex, int newIndex) {
-                          if (_items == null) return;
-                          setState(() {
-                            if (oldIndex < newIndex) {
-                              newIndex -= 1;
-                            }
-                            final TaskCard task = cards.removeAt(oldIndex);
-                            cards.insert(newIndex, task);
-                            final int item = _items!.removeAt(oldIndex);
-                            _items!.insert(newIndex, item);
-                            log("$_items");
-                          });
-                        },
-                        children: cards ?? []),
-                  ),
-                );
-              }) ??
-              const SizedBox();
-        },
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width - 80,
+      child: Gapper.cardPadding(
+        child: ListView(
+            // header: Padding(
+            //   padding: const EdgeInsets.only(bottom: UIConstants.minPadding),
+            //   child: Text(
+            //     widget.sectionName ?? '',
+            //     style: Theme.of(context)
+            //         .textTheme
+            //         .titleLarge
+            //         ?.copyWith(fontWeight: FontWeight.w700),
+            //   ),
+            // ),
+            // shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            physics: const BouncingScrollPhysics(),
+            // proxyDecorator: proxyDecorator,
+            // onReorder: (int oldIndex, int newIndex) {
+            //   if (_items == null) return;
+            //   setState(() {
+            //     if (oldIndex < newIndex) {
+            //       newIndex -= 1;
+            //     }
+            //     final TaskEntity item = _items!.removeAt(oldIndex);
+            //     _items!.insert(newIndex, item);
+            //     log("${_items?.map((e) => cards[_items?.indexOf(e) ?? 0].key)}");
+            //   });
+            // },
+            children: [
+              Text(
+                widget.sectionName ?? '',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.w700),
+              ),
+              Gapper.vGap(),
+              ...cards
+            ]),
       ),
     );
   }
