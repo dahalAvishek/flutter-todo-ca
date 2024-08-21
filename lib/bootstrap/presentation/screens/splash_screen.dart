@@ -105,12 +105,6 @@ class SplashScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "assets/logo/logo.png",
-                    width: 500,
-                    colorBlendMode: BlendMode.clear,
-                    height: 300,
-                  ),
                   GappedList(
                     mainAxisSize: MainAxisSize.max,
                     gap: 10,
