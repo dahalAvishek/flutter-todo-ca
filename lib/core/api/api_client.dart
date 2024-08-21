@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../utils/services/dotenv_service.dart';
 import '../error/failures.dart';
 import 'api_interceptor.dart';
 import 'api_paths.dart';
@@ -10,14 +11,13 @@ typedef ResponseConverter<T> = T Function(dynamic response);
 
 // class ApiClient with SecureStorageMixin {
 class ApiClient {
-  late String _accessToken;
+  late String? _accessToken;
   late Future<Dio> _dio;
 
   ApiClient() {
     try {
-      // _accessToken = getValue(SecureStorageKeys.token);
+      _accessToken = EnvironmentService.getValue("TODOIST_USER_TOKEN");
     } catch (_) {}
-    _accessToken = "e13d2a201efe4b14b0885bc69c7618955c08b733";
 
     _dio = _createDio();
   }
@@ -29,10 +29,10 @@ class ApiClient {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          // if ((await _accessToken) != null) ...{
-          //   'Authorization': "Bearer ${await _accessToken}",
-          // },
-          'Authorization': "Bearer $_accessToken",
+          if ((_accessToken) != null) ...{
+            'Authorization': "Bearer $_accessToken",
+          },
+          // 'Authorization': "Bearer $_accessToken",
         },
         receiveTimeout: const Duration(minutes: 1),
         connectTimeout: const Duration(minutes: 1),
@@ -54,10 +54,10 @@ class ApiClient {
   }
 
   Future<Dio> get dio async {
-    // try {
-    //   _accessToken = getValue(SecureStorageKeys.token);
-    // } catch (_) {}
-    _accessToken = "e13d2a201efe4b14b0885bc69c7618955c08b733";
+    try {
+      _accessToken = EnvironmentService.getValue("TODOIST_USER_TOKEN");
+    } catch (_) {}
+
     final dio = await _createDio();
     return dio;
   }

@@ -45,17 +45,14 @@ import '../layers/presentation/blocs/edit_task/edit_task_bloc.dart';
 import '../layers/presentation/blocs/get_completed_task/get_completed_task_bloc.dart';
 import '../layers/presentation/blocs/get_tasks/get_tasks_bloc.dart';
 import '../layers/presentation/blocs/move_task/move_task_bloc.dart';
+import 'services/dotenv_service.dart';
 import 'services/secure_storage.dart';
 
 GetIt sl = GetIt.instance;
 
 Future<void> serviceLocator() async {
-  // await _initDotEnv();
+  await _initDotEnv();
   await _initSecureStorage();
-  // await _initIsar();
-  // await _initFirebase();
-  // await _initSupabase();
-  // _initServices();
   sl.registerSingleton<ApiClient>(ApiClient());
   _dataSources();
   _repositories();
@@ -63,37 +60,15 @@ Future<void> serviceLocator() async {
   _blocs();
 }
 
-// Future<void> _initDotEnv() async {
-//   await EnvironmentService.init();
-//   sl.registerSingleton<EnvironmentService>(EnvironmentService());
-// }
+Future<void> _initDotEnv() async {
+  await EnvironmentService.init();
+  sl.registerSingleton<EnvironmentService>(EnvironmentService());
+}
 
 Future<void> _initSecureStorage() async {
   await SecureStorageMixin.initSecureStorage();
   sl.registerSingleton<SecureStorageMixin>(SecureStorageMixin());
 }
-
-// Future<void> _initIsar() async {
-//   await IsarServiceMixin.init();
-//   sl.registerSingleton<IsarServiceMixin>(IsarServiceMixin());
-// }
-
-// Future<void> _initFirebase() async {
-//   await FirebaseServiceMixin.init();
-//   sl.registerSingleton<FirebaseServiceMixin>(FirebaseServiceMixin());
-// }
-
-// Future<void> _initSupabase() async {
-//   await SupabaseService.init();
-//   sl.registerSingleton<SupabaseService>(SupabaseService());
-// }
-
-// Future<void> _initServices() async {
-//   // sl.registerSingleton<DeviceService>(DeviceService());
-//   // await sl<DeviceService>().init();
-//   sl.registerSingleton<CameraService>(CameraService());
-//   await sl<CameraService>().init();
-// }
 
 void _repositories() {
   sl.registerLazySingleton<ProjectsRepositories>(
@@ -177,6 +152,4 @@ void _blocs() {
   sl.registerFactory(() => GetTasksBloc(sl(), sl()));
   sl.registerFactory(() => CloseTaskBloc(sl()));
   sl.registerFactory(() => GetCompletedTaskBloc(sl(), sl()));
-
-  // sl.registerFactory(() => AddFavoriteBloc(sl()));
 }
