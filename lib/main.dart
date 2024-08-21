@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/bootstrap/presentation/blocs/create_sections/create_sections_bloc.dart';
 import 'package:flutter_todo/bootstrap/presentation/blocs/get_projects/get_projects_bloc.dart';
+import 'package:localstorage/localstorage.dart';
 
 import 'bootstrap/presentation/blocs/app/app_bloc.dart';
 import 'bootstrap/presentation/blocs/create_project/create_project_bloc.dart';
@@ -14,9 +15,7 @@ import 'core/routes/router_builder.dart';
 import 'layers/presentation/blocs/create_comment/create_comment_bloc.dart';
 import 'layers/presentation/blocs/create_task/create_task_bloc.dart';
 import 'layers/presentation/blocs/edit_task/edit_task_bloc.dart';
-import 'layers/presentation/blocs/get_done/get_done_bloc.dart';
-import 'layers/presentation/blocs/get_in_progress/get_in_progress_bloc.dart';
-import 'layers/presentation/blocs/get_todo/get_todo_bloc.dart';
+import 'layers/presentation/blocs/get_tasks/get_tasks_bloc.dart';
 import 'layers/presentation/blocs/move_task/move_task_bloc.dart';
 import 'utils/dependencies_injection.dart';
 
@@ -27,7 +26,7 @@ void main() {
       // if (kDebugMode) {
       //   CustomImageCache();
       // }
-
+      await initLocalStorage();
       await serviceLocator();
       return SystemChrome.setPreferredOrientations(
         [
@@ -76,13 +75,7 @@ class MyApp extends StatelessWidget {
           create: (context) => sl<CreateCommentBloc>(),
         ),
         BlocProvider(
-          create: (context) => sl<GetDoneBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => sl<GetInProgressBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => sl<GetTodoBloc>(),
+          create: (context) => sl<GetTasksBloc>(),
         ),
       ],
       child: MaterialApp.router(

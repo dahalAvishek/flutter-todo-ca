@@ -25,10 +25,9 @@ class MoveTaskBloc extends Bloc<MoveTaskEvent, MoveTaskState> {
           emit(_Failure(failure.message ?? "Server Error!"));
         }
       },
-          (project) => emit(_Success(
-              message: "successfully task created",
-              newSectionId: event.params.sectionId,
-              oldSectionId: event.oldSectionId ?? '')));
+          (project) => emit(const _Success(
+                message: "successfully task created",
+              )));
     });
   }
 }

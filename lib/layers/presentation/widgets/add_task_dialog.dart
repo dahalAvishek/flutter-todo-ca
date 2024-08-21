@@ -4,7 +4,6 @@ import 'package:flutter_todo/core/presentations/ui/spacer.dart';
 
 import '../../../bootstrap/presentation/blocs/get_sections/get_sections_bloc.dart';
 import '../../../core/presentations/widgets/button.dart';
-import '../../domain/usecases/get_tasks.dart';
 import '../blocs/create_task/create_task_bloc.dart';
 import '../blocs/edit_task/edit_task_bloc.dart';
 import '../blocs/get_tasks/get_tasks_bloc.dart';
@@ -39,9 +38,13 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
                       success: (createTaskV) {
                         if (getSectionsV.sections?.sections?.first.id != null) {
                           context.read<GetTasksBloc>().add(
-                              GetTasksEvent.attempt(GetTasksParams(
-                                  sectionId: getSectionsV
-                                      .sections!.sections!.first.id!)));
+                              GetTasksEvent.getTasks(
+                                  doneStringId: getSectionsV
+                                      .sections!.sections!.first.id!,
+                                  inProgressSectionId: getSectionsV
+                                      .sections!.sections!.first.id!,
+                                  todoSectionId: getSectionsV
+                                      .sections!.sections!.first.id!));
                         }
                       },
                     );

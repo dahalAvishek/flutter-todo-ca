@@ -12,6 +12,10 @@ mixin class SecureStorageMixin {
     secureStorage = const FlutterSecureStorage();
   }
 
+  Future<void> storeInProgressTask(
+          {required String key, required DateTime value}) async =>
+      await secureStorage?.write(key: key, value: value.toIso8601String());
+
   Future<void> storeValue(
           {required SecureStorageKeys key, required String value}) async =>
       await secureStorage?.write(key: key.name, value: value);

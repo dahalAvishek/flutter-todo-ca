@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/core/helpers/extensions/date_extensions.dart';
-import 'package:flutter_todo/layers/domain/usecases/get_tasks.dart';
+import 'package:flutter_todo/layers/presentation/widgets/elapsed_time_widget.dart';
+import 'package:flutter_todo/layers/presentation/widgets/timer_widget.dart';
+import 'package:localstorage/localstorage.dart';
 
 import '../../../bootstrap/domain/entities/section_entity.dart';
 import '../../../core/constants/ui_constants.dart';
@@ -10,12 +14,8 @@ import '../../../core/presentations/ui/spacer.dart';
 import '../../../core/presentations/widgets/button.dart';
 import '../../../utils/dependencies_injection.dart';
 import '../../domain/entities/tasks_entity.dart';
-import '../../domain/usecases/move_task.dart';
 import '../blocs/edit_task/edit_task_bloc.dart';
-import '../blocs/get_done/get_done_bloc.dart';
-import '../blocs/get_in_progress/get_in_progress_bloc.dart';
 import '../blocs/get_task/get_task_bloc.dart';
-import '../blocs/get_todo/get_todo_bloc.dart';
 import '../blocs/move_task/move_task_bloc.dart';
 import 'add_task_dialog.dart';
 import 'comments_section.dart';
@@ -25,11 +25,17 @@ class TaskCard extends StatefulWidget {
   final String sectionId;
   final double? elevation;
   final List<SectionEntity> sections;
-  final List<DropdownMenuItem<Object?>>? items;
+  final bool isInProgressCard;
+  final bool isDoneCard;
+  // final Widget moveToWidget;
+  final List<DropdownMenuItem<String?>> Function(String?) itemBuilder;
   const TaskCard({
     super.key,
-    this.items,
+    this.isInProgressCard = false,
+    required this.itemBuilder,
+    this.isDoneCard = false,
     required this.sections,
+    // required this.moveToWidget,
     required this.sectionId,
     this.elevation,
     required this.task,
@@ -49,30 +55,10 @@ class _TaskCardState extends State<TaskCard> {
       child: MultiBlocListener(
         listeners: [
           BlocListener<MoveTaskBloc, MoveTaskState>(
-            listener: (context, state) {
-              state.mapOrNull(success: (value) {
-                context.read<GetTodoBloc>().add(GetTodoEvent.attempt(
-                    GetTasksParams(sectionId: widget.sectionId)));
-                context.read<GetInProgressBloc>().add(
-                    GetInProgressEvent.attempt(
-                        GetTasksParams(sectionId: widget.sectionId)));
-                context.read<GetDoneBloc>().add(GetDoneEvent.attempt(
-                    GetTasksParams(sectionId: widget.sectionId)));
-              });
-            },
+            listener: (context, state) {},
           ),
           BlocListener<EditTaskBloc, EditTaskState>(
-            listener: (context, state) {
-              state.mapOrNull(success: (value) {
-                context.read<GetTodoBloc>().add(GetTodoEvent.attempt(
-                    GetTasksParams(sectionId: widget.sectionId)));
-                context.read<GetInProgressBloc>().add(
-                    GetInProgressEvent.attempt(
-                        GetTasksParams(sectionId: widget.sectionId)));
-                context.read<GetDoneBloc>().add(GetDoneEvent.attempt(
-                    GetTasksParams(sectionId: widget.sectionId)));
-              });
-            },
+            listener: (context, state) {},
           ),
         ],
         child: Column(
@@ -148,6 +134,9 @@ class _TaskCardState extends State<TaskCard> {
                                 child: DropdownButton2(
                                     isDense: true,
                                     isExpanded: false,
+                                    onChanged: (value) {
+                                      log("lado");
+                                    },
                                     customButton: const Icon(Icons.more_horiz),
                                     dropdownStyleData: DropdownStyleData(
                                       width: 160,
@@ -158,71 +147,10 @@ class _TaskCardState extends State<TaskCard> {
                                       ),
                                       offset: const Offset(-125, -4),
                                     ),
-                                    // icon:
-                                    items: widget.sections
-                                            .map((section) =>
-                                                DropdownMenuItem<SectionEntity>(
-                                                  value: section,
-                                                  onTap: () {
-                                                    if (widget.task.id !=
-                                                            null &&
-                                                        section.id != null) {
-                                                      context
-                                                          .read<MoveTaskBloc>()
-                                                          .add(MoveTaskEvent.attempt(
-                                                              oldSectionId:
-                                                                  section.id,
-                                                              params: MoveTasksParams(
-                                                                  id: widget
-                                                                      .task.id!,
-                                                                  sectionId:
-                                                                      section
-                                                                          .id!)));
-                                                    }
-                                                  },
-                                                  child: Text(
-                                                      "To ${section.name}"),
-                                                ))
-                                            .toList() ??
-                                        [],
-                                    onChanged: (value) {}),
+                                    items: widget.itemBuilder(widget.task.id)),
                               )
                             ],
                           ),
-
-                          // InkWell(
-                          //     onTap: () {
-                          //       showModalBottomSheet(
-                          //           context: context,
-                          //           backgroundColor:
-                          //               Theme.of(context).colorScheme.secondary,
-                          //           isScrollControlled: true,
-                          //           enableDrag: true,
-                          //           elevation: 300,
-                          //           anchorPoint: Offset.fromDirection(1, 200),
-                          //           builder: (context) {
-                          //             return Gapper.cardPadding(
-                          //               child: Column(
-                          //                 children: widget.sections
-                          //                     .map((section) => InkWell(
-                          //                           child: SizedBox(
-                          //                             width: double.maxFinite,
-                          //                             height: 50,
-                          //                             child:
-                          //                                 Text(section.name ?? ''),
-                          //                           ),
-                          //                         ))
-                          //                     .toList(),
-                          //               ),
-                          //             );
-                          //           });
-                          //     },
-                          //     // highlightColor: AppColors.error,
-                          //     // splashColor: AppColors.error,
-                          //     highlightColor:
-                          //         Theme.of(context).colorScheme.onSecondary,
-                          //     splashColor: Theme.of(context).colorScheme.surface,
-                          //     child: const Icon(Icons.more_horiz))
                         ],
                       ),
                       Gapper.vmGap(),
@@ -236,6 +164,29 @@ class _TaskCardState extends State<TaskCard> {
                                     Theme.of(context).colorScheme.onSecondary),
                       ),
                       Gapper.vGap(),
+                      widget.task.id != null &&
+                                  localStorage.getItem(widget.task.id!) !=
+                                      null &&
+                                  widget.isInProgressCard ??
+                              false
+                          ? TimerWidget(
+                              startTime: DateTime.parse(
+                                  localStorage.getItem(widget.task.id!)!))
+                          : const SizedBox(),
+                      widget.isDoneCard ?? false
+                          ? Gapper.vGap()
+                          : const SizedBox(),
+                      widget.task.id != null &&
+                                  localStorage.getItem(widget.task.id!) !=
+                                      null &&
+                                  widget.isDoneCard ??
+                              false
+                          ? ElapsedTimeWidget(
+                              duration: localStorage.getItem(widget.task.id!)!)
+                          : const SizedBox(),
+                      widget.isInProgressCard ?? false
+                          ? Gapper.vGap()
+                          : const SizedBox(),
                       const Divider(),
                       IntrinsicHeight(
                         child: Row(

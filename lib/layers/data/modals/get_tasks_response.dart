@@ -11,9 +11,11 @@ class GetTasksResponse with _$GetTasksResponse {
 
   const factory GetTasksResponse({List<Task>? tasks}) = _GetTasksResponse;
 
-  factory GetTasksResponse.fromJson(List json) => GetTasksResponse(
-        tasks: (json).map((taskJson) => Task.fromJson(taskJson)).toList(),
-      );
+  factory GetTasksResponse.fromJson(List json) {
+    return GetTasksResponse(
+      tasks: (json).map((taskJson) => Task.fromJson(taskJson)).toList(),
+    );
+  }
 
   TasksEntity toEntity() => TasksEntity(
         tasks!

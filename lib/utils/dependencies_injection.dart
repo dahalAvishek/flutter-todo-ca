@@ -39,9 +39,7 @@ import '../layers/domain/usecases/move_task.dart';
 import '../layers/presentation/blocs/create_comment/create_comment_bloc.dart';
 import '../layers/presentation/blocs/create_task/create_task_bloc.dart';
 import '../layers/presentation/blocs/edit_task/edit_task_bloc.dart';
-import '../layers/presentation/blocs/get_done/get_done_bloc.dart';
-import '../layers/presentation/blocs/get_in_progress/get_in_progress_bloc.dart';
-import '../layers/presentation/blocs/get_todo/get_todo_bloc.dart';
+import '../layers/presentation/blocs/get_tasks/get_tasks_bloc.dart';
 import '../layers/presentation/blocs/move_task/move_task_bloc.dart';
 import 'services/secure_storage.dart';
 
@@ -170,9 +168,7 @@ void _blocs() {
   sl.registerFactory(() => CreateCommentBloc(sl()));
   sl.registerFactory(() => MoveTaskBloc(sl()));
 
-  sl.registerFactory(() => GetTodoBloc(sl()));
-  sl.registerFactory(() => GetInProgressBloc(sl()));
-  sl.registerFactory(() => GetDoneBloc(sl()));
+  sl.registerFactory(() => GetTasksBloc(sl(), sl()));
 
   // sl.registerFactory(() => AddFavoriteBloc(sl()));
 }

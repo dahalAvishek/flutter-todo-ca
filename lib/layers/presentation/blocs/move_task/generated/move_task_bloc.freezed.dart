@@ -17,21 +17,19 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MoveTaskEvent {
   MoveTasksParams get params => throw _privateConstructorUsedError;
-  String? get oldSectionId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(MoveTasksParams params, String? oldSectionId)
-        attempt,
+    required TResult Function(MoveTasksParams params) attempt,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(MoveTasksParams params, String? oldSectionId)? attempt,
+    TResult? Function(MoveTasksParams params)? attempt,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(MoveTasksParams params, String? oldSectionId)? attempt,
+    TResult Function(MoveTasksParams params)? attempt,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +61,7 @@ abstract class $MoveTaskEventCopyWith<$Res> {
           MoveTaskEvent value, $Res Function(MoveTaskEvent) then) =
       _$MoveTaskEventCopyWithImpl<$Res, MoveTaskEvent>;
   @useResult
-  $Res call({MoveTasksParams params, String? oldSectionId});
+  $Res call({MoveTasksParams params});
 
   $MoveTasksParamsCopyWith<$Res> get params;
 }
@@ -82,17 +80,12 @@ class _$MoveTaskEventCopyWithImpl<$Res, $Val extends MoveTaskEvent>
   @override
   $Res call({
     Object? params = null,
-    Object? oldSectionId = freezed,
   }) {
     return _then(_value.copyWith(
       params: null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
               as MoveTasksParams,
-      oldSectionId: freezed == oldSectionId
-          ? _value.oldSectionId
-          : oldSectionId // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 
@@ -113,7 +106,7 @@ abstract class _$$AttemptImplCopyWith<$Res>
       __$$AttemptImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({MoveTasksParams params, String? oldSectionId});
+  $Res call({MoveTasksParams params});
 
   @override
   $MoveTasksParamsCopyWith<$Res> get params;
@@ -131,17 +124,12 @@ class __$$AttemptImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? params = null,
-    Object? oldSectionId = freezed,
   }) {
     return _then(_$AttemptImpl(
       params: null == params
           ? _value.params
           : params // ignore: cast_nullable_to_non_nullable
               as MoveTasksParams,
-      oldSectionId: freezed == oldSectionId
-          ? _value.oldSectionId
-          : oldSectionId // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -149,16 +137,14 @@ class __$$AttemptImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AttemptImpl implements _Attempt {
-  const _$AttemptImpl({required this.params, this.oldSectionId});
+  const _$AttemptImpl({required this.params});
 
   @override
   final MoveTasksParams params;
-  @override
-  final String? oldSectionId;
 
   @override
   String toString() {
-    return 'MoveTaskEvent.attempt(params: $params, oldSectionId: $oldSectionId)';
+    return 'MoveTaskEvent.attempt(params: $params)';
   }
 
   @override
@@ -166,13 +152,11 @@ class _$AttemptImpl implements _Attempt {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AttemptImpl &&
-            (identical(other.params, params) || other.params == params) &&
-            (identical(other.oldSectionId, oldSectionId) ||
-                other.oldSectionId == oldSectionId));
+            (identical(other.params, params) || other.params == params));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, params, oldSectionId);
+  int get hashCode => Object.hash(runtimeType, params);
 
   @JsonKey(ignore: true)
   @override
@@ -183,28 +167,27 @@ class _$AttemptImpl implements _Attempt {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(MoveTasksParams params, String? oldSectionId)
-        attempt,
+    required TResult Function(MoveTasksParams params) attempt,
   }) {
-    return attempt(params, oldSectionId);
+    return attempt(params);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(MoveTasksParams params, String? oldSectionId)? attempt,
+    TResult? Function(MoveTasksParams params)? attempt,
   }) {
-    return attempt?.call(params, oldSectionId);
+    return attempt?.call(params);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(MoveTasksParams params, String? oldSectionId)? attempt,
+    TResult Function(MoveTasksParams params)? attempt,
     required TResult orElse(),
   }) {
     if (attempt != null) {
-      return attempt(params, oldSectionId);
+      return attempt(params);
     }
     return orElse();
   }
@@ -239,14 +222,11 @@ class _$AttemptImpl implements _Attempt {
 }
 
 abstract class _Attempt implements MoveTaskEvent {
-  const factory _Attempt(
-      {required final MoveTasksParams params,
-      final String? oldSectionId}) = _$AttemptImpl;
+  const factory _Attempt({required final MoveTasksParams params}) =
+      _$AttemptImpl;
 
   @override
   MoveTasksParams get params;
-  @override
-  String? get oldSectionId;
   @override
   @JsonKey(ignore: true)
   _$$AttemptImplCopyWith<_$AttemptImpl> get copyWith =>
@@ -259,9 +239,7 @@ mixin _$MoveTaskState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            String message, String newSectionId, String oldSectionId)
-        success,
+    required TResult Function(String message) success,
     required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -269,8 +247,7 @@ mixin _$MoveTaskState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult? Function(String message)? success,
     TResult? Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -278,8 +255,7 @@ mixin _$MoveTaskState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult Function(String message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
@@ -369,9 +345,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            String message, String newSectionId, String oldSectionId)
-        success,
+    required TResult Function(String message) success,
     required TResult Function(String message) failure,
   }) {
     return initial();
@@ -382,8 +356,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult? Function(String message)? success,
     TResult? Function(String message)? failure,
   }) {
     return initial?.call();
@@ -394,8 +367,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult Function(String message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -487,9 +459,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            String message, String newSectionId, String oldSectionId)
-        success,
+    required TResult Function(String message) success,
     required TResult Function(String message) failure,
   }) {
     return loading();
@@ -500,8 +470,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult? Function(String message)? success,
     TResult? Function(String message)? failure,
   }) {
     return loading?.call();
@@ -512,8 +481,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult Function(String message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -571,7 +539,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message, String newSectionId, String oldSectionId});
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -586,21 +554,11 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
-    Object? newSectionId = null,
-    Object? oldSectionId = null,
   }) {
     return _then(_$SuccessImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      newSectionId: null == newSectionId
-          ? _value.newSectionId
-          : newSectionId // ignore: cast_nullable_to_non_nullable
-              as String,
-      oldSectionId: null == oldSectionId
-          ? _value.oldSectionId
-          : oldSectionId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -609,21 +567,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(
-      {required this.message,
-      required this.newSectionId,
-      required this.oldSectionId});
+  const _$SuccessImpl({required this.message});
 
   @override
   final String message;
-  @override
-  final String newSectionId;
-  @override
-  final String oldSectionId;
 
   @override
   String toString() {
-    return 'MoveTaskState.success(message: $message, newSectionId: $newSectionId, oldSectionId: $oldSectionId)';
+    return 'MoveTaskState.success(message: $message)';
   }
 
   @override
@@ -631,16 +582,11 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.message, message) || other.message == message) &&
-            (identical(other.newSectionId, newSectionId) ||
-                other.newSectionId == newSectionId) &&
-            (identical(other.oldSectionId, oldSectionId) ||
-                other.oldSectionId == oldSectionId));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, message, newSectionId, oldSectionId);
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
@@ -653,12 +599,10 @@ class _$SuccessImpl implements _Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            String message, String newSectionId, String oldSectionId)
-        success,
+    required TResult Function(String message) success,
     required TResult Function(String message) failure,
   }) {
-    return success(message, newSectionId, oldSectionId);
+    return success(message);
   }
 
   @override
@@ -666,11 +610,10 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult? Function(String message)? success,
     TResult? Function(String message)? failure,
   }) {
-    return success?.call(message, newSectionId, oldSectionId);
+    return success?.call(message);
   }
 
   @override
@@ -678,13 +621,12 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult Function(String message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(message, newSectionId, oldSectionId);
+      return success(message);
     }
     return orElse();
   }
@@ -728,14 +670,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements MoveTaskState {
-  const factory _Success(
-      {required final String message,
-      required final String newSectionId,
-      required final String oldSectionId}) = _$SuccessImpl;
+  const factory _Success({required final String message}) = _$SuccessImpl;
 
   String get message;
-  String get newSectionId;
-  String get oldSectionId;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -807,9 +744,7 @@ class _$FailureImpl implements _Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            String message, String newSectionId, String oldSectionId)
-        success,
+    required TResult Function(String message) success,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -820,8 +755,7 @@ class _$FailureImpl implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult? Function(String message)? success,
     TResult? Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -832,8 +766,7 @@ class _$FailureImpl implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message, String newSectionId, String oldSectionId)?
-        success,
+    TResult Function(String message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {

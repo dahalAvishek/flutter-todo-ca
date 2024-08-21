@@ -31,10 +31,8 @@ class TaskRemoteSourceImpl implements TaskRemoteSource {
   @override
   Future<Either<Failure, GetTasksResponse>> getTasks(
       GetTasksParams params) async {
-    String? projectId =
-        await _secureStorageMixin.getValue(SecureStorageKeys.projectId);
     final response = await _client.getRequest(
-      "${ApiPaths.tasksUrl}?section_id=${params.sectionId}",
+      "${ApiPaths.tasksUrl}${params.projectId != null ? '/?project_id=${params.projectId}' : ''}",
       converter: (response) => GetTasksResponse.fromJson(response as List),
     );
     return response;
