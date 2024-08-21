@@ -14,6 +14,7 @@ class Task with _$Task {
     @JsonKey(name: "comment_count") int? commentCount,
     @JsonKey(name: "is_completed") bool? isCompleted,
     @JsonKey(name: "created_at") String? createdAt,
+    @JsonKey(name: "completed_at") String? completedAt,
     String? content,
     String? description,
     int? order,

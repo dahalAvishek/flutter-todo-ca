@@ -26,6 +26,7 @@ class GetCompletedTaskresponse with _$GetCompletedTaskresponse {
               (e) => TaskEntity(
                   id: e.id,
                   content: e.content,
+                  completedAt: e.completedAt,
                   commentCount: e.commentCount,
                   createdAt: e.createdAt,
                   description: e.description,

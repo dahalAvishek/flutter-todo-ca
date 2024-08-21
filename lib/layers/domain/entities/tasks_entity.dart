@@ -13,6 +13,7 @@ class TaskEntity with _$TaskEntity {
     String? content,
     String? description,
     String? createdAt,
+    String? completedAt,
     bool? isCompleted,
   }) = _TaskEntity;
 }
