@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_todo/bootstrap/presentation/screens/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../layers/presentation/screens/history_screen.dart';
 import '../../layers/presentation/screens/tasks_screen.dart';
 import 'app_routes.dart';
 
@@ -26,6 +27,12 @@ final GoRouter router = GoRouter(
         path: TASKS_ROUTE,
         pageBuilder: (context, state) {
           return NoTransition(key: state.pageKey, child: const TasksScreen());
+        },
+      ),
+      GoRoute(
+        path: HISTORY_ROUTE,
+        pageBuilder: (context, state) {
+          return NoTransition(key: state.pageKey, child: const HistoryScreen());
         },
       ),
       GoRoute(

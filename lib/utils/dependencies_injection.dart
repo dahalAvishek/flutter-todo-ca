@@ -29,16 +29,20 @@ import '../layers/data/source/task_remote_source.dart';
 import '../layers/domain/repositories/comment_respository.dart';
 import '../layers/domain/repositories/sync_repository.dart';
 import '../layers/domain/repositories/task_repository.dart';
+import '../layers/domain/usecases/close_task.dart';
 import '../layers/domain/usecases/create_comment.dart';
 import '../layers/domain/usecases/create_task.dart';
 import '../layers/domain/usecases/edit_task.dart';
 import '../layers/domain/usecases/get_comments.dart';
+import '../layers/domain/usecases/get_completed_task.dart';
 import '../layers/domain/usecases/get_task.dart';
 import '../layers/domain/usecases/get_tasks.dart';
 import '../layers/domain/usecases/move_task.dart';
+import '../layers/presentation/blocs/close_task/close_task_bloc.dart';
 import '../layers/presentation/blocs/create_comment/create_comment_bloc.dart';
 import '../layers/presentation/blocs/create_task/create_task_bloc.dart';
 import '../layers/presentation/blocs/edit_task/edit_task_bloc.dart';
+import '../layers/presentation/blocs/get_completed_task/get_completed_task_bloc.dart';
 import '../layers/presentation/blocs/get_tasks/get_tasks_bloc.dart';
 import '../layers/presentation/blocs/move_task/move_task_bloc.dart';
 import 'services/secure_storage.dart';
@@ -104,6 +108,7 @@ void _repositories() {
   sl.registerLazySingleton<CommentRepository>(
     () => CommentRepositoryImpl(source: sl()),
   );
+
   sl.registerLazySingleton<AppRepository>(
     () => AppRepositoryImpl(
       appLocalSource: sl(),
@@ -152,8 +157,11 @@ void _useCase() {
   sl.registerLazySingleton(() => GetComments(sl()));
   sl.registerLazySingleton(() => CreateComment(sl()));
   sl.registerLazySingleton(() => MoveTask(sl()));
+  sl.registerLazySingleton(() => CloseTask(sl()));
+
   sl.registerLazySingleton(() => GetTask(sl()));
   sl.registerLazySingleton(() => EditTask(sl()));
+  sl.registerLazySingleton(() => GetCompletedTask(sl()));
 }
 
 void _blocs() {
@@ -164,11 +172,11 @@ void _blocs() {
   sl.registerFactory(() => CreateSectionsBloc(sl(), sl()));
   sl.registerFactory(() => CreateTaskBloc(sl(), sl()));
   sl.registerFactory(() => EditTaskBloc(sl()));
-
   sl.registerFactory(() => CreateCommentBloc(sl()));
   sl.registerFactory(() => MoveTaskBloc(sl()));
-
   sl.registerFactory(() => GetTasksBloc(sl(), sl()));
+  sl.registerFactory(() => CloseTaskBloc(sl()));
+  sl.registerFactory(() => GetCompletedTaskBloc(sl(), sl()));
 
   // sl.registerFactory(() => AddFavoriteBloc(sl()));
 }

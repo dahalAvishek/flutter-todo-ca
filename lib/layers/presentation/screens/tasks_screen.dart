@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo/layers/domain/usecases/close_task.dart';
+import 'package:go_router/go_router.dart';
 import 'package:localstorage/localstorage.dart';
 
 import '../../../bootstrap/presentation/blocs/get_projects/get_projects_bloc.dart';
 import '../../../bootstrap/presentation/blocs/get_sections/get_sections_bloc.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/presentations/ui/spacer.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../domain/entities/tasks_entity.dart';
 import '../../domain/usecases/move_task.dart';
+import '../blocs/close_task/close_task_bloc.dart';
 import '../blocs/get_tasks/get_tasks_bloc.dart';
 import '../blocs/move_task/move_task_bloc.dart';
 import '../widgets/add_task_dialog.dart';
@@ -53,7 +57,9 @@ class _TasksScreenState extends State<TasksScreen> {
                 Padding(
                   padding: const EdgeInsets.only(right: 12),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.push(HISTORY_ROUTE);
+                    },
                     splashColor: AppColors.error,
                     highlightColor: AppColors.dark,
                     child: const Material(child: Icon(Icons.history)),
@@ -98,11 +104,27 @@ class _TasksScreenState extends State<TasksScreen> {
                             return state.mapOrNull(
                                   successAll: (taskVal) {
                                     List<TaskEntity> todos =
-                                        taskVal.todo.toList();
+                                        taskVal.todo.where((todo) {
+                                      if (todo.isCompleted == null) {
+                                        return false;
+                                      }
+                                      return !todo.isCompleted!;
+                                    }).toList();
                                     List<TaskEntity> inProgress =
-                                        taskVal.inProgress.toList();
+                                        taskVal.inProgress.where((task) {
+                                      if (task.isCompleted == null) {
+                                        return false;
+                                      }
+                                      return !task.isCompleted!;
+                                    }).toList();
                                     List<TaskEntity> done =
-                                        taskVal.done.toList();
+                                        taskVal.done.where((task) {
+                                      if (task.isCompleted == null) {
+                                        return false;
+                                      }
+                                      return !task.isCompleted!;
+                                    }).toList();
+
                                     // log(todos.first.content ?? '');
                                     return SizedBox(
                                       height: double.maxFinite,
@@ -218,9 +240,12 @@ class _TasksScreenState extends State<TasksScreen> {
                                                                           doneSectionVal,
                                                                       onTap:
                                                                           () {
-                                                                        context
-                                                                            .read<MoveTaskBloc>()
-                                                                            .add(MoveTaskEvent.attempt(params: MoveTasksParams(id: taskID ?? '', sectionId: todoSectionVal)));
+                                                                        if (taskID !=
+                                                                            null) {
+                                                                          context.read<CloseTaskBloc>().add(CloseTaskEvent.attempt(CloseTaskParams(
+                                                                              dateCompleted: DateTime.now().toLocal().toUtc().toIso8601String(),
+                                                                              id: taskID)));
+                                                                        }
                                                                       },
                                                                       child: const Text(
                                                                           "Close"))

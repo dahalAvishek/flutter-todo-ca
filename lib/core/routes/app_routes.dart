@@ -2,5 +2,4 @@
 
 const String TASKS_ROUTE = "/task";
 const String SPLASH_ROUTE = "/splash";
-// const String ADD_TASK_ROUTE = "/splash";
-
+const String HISTORY_ROUTE = "/history";

@@ -24,6 +24,7 @@ mixin _$TaskEntity {
   String? get content => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
+  bool? get isCompleted => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskEntityCopyWith<TaskEntity> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $TaskEntityCopyWith<$Res> {
       int? commentCount,
       String? content,
       String? description,
-      String? createdAt});
+      String? createdAt,
+      bool? isCompleted});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
     Object? content = freezed,
     Object? description = freezed,
     Object? createdAt = freezed,
+    Object? isCompleted = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -102,6 +105,10 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCompleted: freezed == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$TaskEntityImplCopyWith<$Res>
       int? commentCount,
       String? content,
       String? description,
-      String? createdAt});
+      String? createdAt,
+      bool? isCompleted});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
     Object? content = freezed,
     Object? description = freezed,
     Object? createdAt = freezed,
+    Object? isCompleted = freezed,
   }) {
     return _then(_$TaskEntityImpl(
       id: freezed == id
@@ -178,6 +187,10 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCompleted: freezed == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -193,7 +206,8 @@ class _$TaskEntityImpl implements _TaskEntity {
       this.commentCount,
       this.content,
       this.description,
-      this.createdAt});
+      this.createdAt,
+      this.isCompleted});
 
   @override
   final String? id;
@@ -211,10 +225,12 @@ class _$TaskEntityImpl implements _TaskEntity {
   final String? description;
   @override
   final String? createdAt;
+  @override
+  final bool? isCompleted;
 
   @override
   String toString() {
-    return 'TaskEntity(id: $id, projectId: $projectId, sectionId: $sectionId, order: $order, commentCount: $commentCount, content: $content, description: $description, createdAt: $createdAt)';
+    return 'TaskEntity(id: $id, projectId: $projectId, sectionId: $sectionId, order: $order, commentCount: $commentCount, content: $content, description: $description, createdAt: $createdAt, isCompleted: $isCompleted)';
   }
 
   @override
@@ -234,12 +250,14 @@ class _$TaskEntityImpl implements _TaskEntity {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.isCompleted, isCompleted) ||
+                other.isCompleted == isCompleted));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, id, projectId, sectionId, order,
-      commentCount, content, description, createdAt);
+      commentCount, content, description, createdAt, isCompleted);
 
   @JsonKey(ignore: true)
   @override
@@ -257,7 +275,8 @@ abstract class _TaskEntity implements TaskEntity {
       final int? commentCount,
       final String? content,
       final String? description,
-      final String? createdAt}) = _$TaskEntityImpl;
+      final String? createdAt,
+      final bool? isCompleted}) = _$TaskEntityImpl;
 
   @override
   String? get id;
@@ -275,6 +294,8 @@ abstract class _TaskEntity implements TaskEntity {
   String? get description;
   @override
   String? get createdAt;
+  @override
+  bool? get isCompleted;
   @override
   @JsonKey(ignore: true)
   _$$TaskEntityImplCopyWith<_$TaskEntityImpl> get copyWith =>

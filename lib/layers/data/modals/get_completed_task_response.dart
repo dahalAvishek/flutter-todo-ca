@@ -3,17 +3,20 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/entities/tasks_entity.dart';
 import 'schemas/task.dart';
 
-part 'generated/get_tasks_response.freezed.dart';
+part 'generated/get_completed_task_response.freezed.dart';
 
 @Freezed(fromJson: false, toJson: false)
-class GetTasksResponse with _$GetTasksResponse {
-  const GetTasksResponse._();
+class GetCompletedTaskresponse with _$GetCompletedTaskresponse {
+  const GetCompletedTaskresponse._();
 
-  const factory GetTasksResponse({List<Task>? tasks}) = _GetTasksResponse;
+  const factory GetCompletedTaskresponse({List<Task>? tasks}) =
+      _GetCompletedTaskresponse;
 
-  factory GetTasksResponse.fromJson(List json) {
-    return GetTasksResponse(
-      tasks: (json).map((taskJson) => Task.fromJson(taskJson)).toList(),
+  factory GetCompletedTaskresponse.fromJson(Map<String, dynamic> json) {
+    return GetCompletedTaskresponse(
+      tasks: (json['items'] as List)
+          .map((taskJson) => Task.fromJson(taskJson))
+          .toList(),
     );
   }
 

@@ -25,7 +25,7 @@ class ApiClient {
   Future<Dio> _createDio() async {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiPaths.apiBaseUrl,
+        baseUrl: ApiPaths.baseUrl,
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -69,8 +69,8 @@ class ApiClient {
     String? requestName,
   }) async {
     try {
-      final response =
-          await (await dio).get(url, queryParameters: queryParameters);
+      final response = await (await dio)
+          .get("${ApiPaths.restApiUrl}$url", queryParameters: queryParameters);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -95,7 +95,8 @@ class ApiClient {
       required ResponseConverter<T> converter,
       String? requestName}) async {
     try {
-      final response = await (await dio).post(url, data: data ?? formData);
+      final response = await (await dio)
+          .post("${ApiPaths.restApiUrl}$url", data: data ?? formData);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -133,7 +134,8 @@ class ApiClient {
       required ResponseConverter<T> converter,
       String? requestName}) async {
     try {
-      final response = await (await dio).patch(url, data: data ?? formData);
+      final response = await (await dio)
+          .patch("${ApiPaths.restApiUrl}$url", data: data ?? formData);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -167,7 +169,8 @@ class ApiClient {
 
   Future<Either<Failure, T>> syncRequest<T>({
     required String type,
-    required Map<String, dynamic> args,
+    String? urlExtension,
+    Map<String, dynamic>? args,
     required ResponseConverter<T> converter,
   }) async {
     try {
@@ -176,7 +179,12 @@ class ApiClient {
           {"type": type, "uuid": const Uuid().v4(), "args": args}
         ]
       };
-      final response = await (await dio).post(ApiPaths.syncUrl, data: data);
+
+      final response = args != null
+          ? await (await dio).post("${ApiPaths.syncUrl}/sync", data: data)
+          : await (await dio).get(
+              "${ApiPaths.syncUrl}/${urlExtension ?? ''}",
+            );
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(
