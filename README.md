@@ -2,19 +2,6 @@
 
 A new Flutter project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
 ## Prerequisites
 
 - **Todoist Account:** You need a Todoist account to get started.
@@ -45,14 +32,18 @@ samples, guidance on mobile development, and a full API reference.
   ```sh
   touch .env
   ```
-- **Add your Todoist account access token:** : Open the .env file and add your Todoist API key as shown below:
+- **Add your Todoist account access token:** : Open the .env file and add your Todoist access token as shown below:
 - ```sh
-  TODOIST_USER_TOKEN=<<YOUR_API_KEY>>
+  TODOIST_USER_TOKEN=<<YOUR_ACCESS_TOKEN>>
   ```
-  Replace `<<YOUR_API_KEY>>` with the actual API key you copied from the Todoist app.
+  Replace `<<YOUR_API_KEY>>` with the actual access token you copied from the Todoist app.
 
 #### 3. Run the Flutter Todo App
 
+- install libraries using
+  ```sh
+  flutter pub get
+  ```sh
 - **Run on Android:** You can run the app on an Android device or emulator using either VS Code or Android Studio.
 
 ### Project Architecture
