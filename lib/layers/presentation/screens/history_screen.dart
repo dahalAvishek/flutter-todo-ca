@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/core/constants/ui_constants.dart';
 import 'package:flutter_todo/layers/presentation/widgets/history_card.dart';
+import 'package:flutter_todo/layers/presentation/widgets/task_screen_shimmer.dart';
 
 import '../../../core/presentations/ui/spacer.dart';
 import '../blocs/get_completed_task/get_completed_task_bloc.dart';
@@ -39,7 +40,7 @@ class HistoryScreen extends StatelessWidget {
                                   child: HistoryCard(
                                     completedAt: element.completedAt ?? '',
                                     content: element.content ?? '',
-                                    taskId: element.id ?? '',
+                                    taskId: element.taskId ?? '',
                                   ),
                                 )),
                             Gapper.vGap(),
@@ -48,6 +49,7 @@ class HistoryScreen extends StatelessWidget {
                       ),
                     );
                   },
+                  loading: (value) => const TaskScreenShimmer(),
                 ) ??
                 const SizedBox();
           },

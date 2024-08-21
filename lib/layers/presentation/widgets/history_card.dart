@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/core/helpers/extensions/date_extensions.dart';
 import 'package:localstorage/localstorage.dart';
@@ -17,7 +19,9 @@ class HistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final taskDuration = localStorage.getItem(taskId);
+    final taskDuration = localStorage.getItem("$taskId-duration");
+    log("$taskId${localStorage.getItem("$taskId-duration")}");
+
     return Container(
         width: double.maxFinite,
         decoration: BoxDecoration(

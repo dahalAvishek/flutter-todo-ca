@@ -14,6 +14,7 @@ _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
       isCompleted: json['is_completed'] as bool?,
       createdAt: json['created_at'] as String?,
       completedAt: json['completed_at'] as String?,
+      taskId: json['task_id'] as String?,
       content: json['content'] as String?,
       description: json['description'] as String?,
       order: (json['order'] as num?)?.toInt(),

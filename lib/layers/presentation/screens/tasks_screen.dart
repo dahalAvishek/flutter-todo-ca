@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo/layers/domain/usecases/close_task.dart';
+import 'package:flutter_todo/layers/presentation/blocs/create_task/create_task_bloc.dart';
+import 'package:flutter_todo/layers/presentation/widgets/task_screen_shimmer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:localstorage/localstorage.dart';
 
@@ -12,6 +14,7 @@ import '../../../core/routes/app_routes.dart';
 import '../../domain/entities/tasks_entity.dart';
 import '../../domain/usecases/move_task.dart';
 import '../blocs/close_task/close_task_bloc.dart';
+import '../blocs/get_completed_task/get_completed_task_bloc.dart';
 import '../blocs/get_tasks/get_tasks_bloc.dart';
 import '../blocs/move_task/move_task_bloc.dart';
 import '../widgets/add_task_dialog.dart';
@@ -27,10 +30,8 @@ class TasksScreen extends StatefulWidget {
 class _TasksScreenState extends State<TasksScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<MoveTaskBloc, MoveTaskState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+    return BlocListener<CreateTaskBloc, CreateTaskState>(
+      listener: (context, state) {},
       child: MultiBlocProvider(
           providers: [
             BlocProvider.value(
@@ -99,167 +100,207 @@ class _TasksScreenState extends State<TasksScreen> {
                                   inProgressSectionId: inProgressSectionVal)),
                           ),
                         ],
-                        child: BlocBuilder<GetTasksBloc, GetTasksState>(
-                          builder: (context, state) {
-                            return state.mapOrNull(
-                                  successAll: (taskVal) {
-                                    List<TaskEntity> todos =
-                                        taskVal.todo.where((todo) {
-                                      if (todo.isCompleted == null) {
-                                        return false;
-                                      }
-                                      return !todo.isCompleted!;
-                                    }).toList();
-                                    List<TaskEntity> inProgress =
-                                        taskVal.inProgress.where((task) {
-                                      if (task.isCompleted == null) {
-                                        return false;
-                                      }
-                                      return !task.isCompleted!;
-                                    }).toList();
-                                    List<TaskEntity> done =
-                                        taskVal.done.where((task) {
-                                      if (task.isCompleted == null) {
-                                        return false;
-                                      }
-                                      return !task.isCompleted!;
-                                    }).toList();
+                        child: MultiBlocListener(
+                          listeners: [
+                            BlocListener<CreateTaskBloc, CreateTaskState>(
+                              listener: (context, state) {
+                                state.mapOrNull(
+                                  success: (value) => context
+                                      .read<GetTasksBloc>()
+                                      .add(GetTasksEvent.getTasks(
+                                          todoSectionId: todoSectionVal,
+                                          inProgressSectionId:
+                                              inProgressSectionVal,
+                                          doneStringId: doneSectionVal)),
+                                );
+                              },
+                            ),
+                            BlocListener<CloseTaskBloc, CloseTaskState>(
+                              listener: (context, state) {
+                                state.mapOrNull(
+                                  success: (value) => context
+                                      .read<GetCompletedTaskBloc>()
+                                      .add(const GetCompletedTaskEvent
+                                          .attempt()),
+                                );
+                              },
+                            ),
+                          ],
+                          child: BlocBuilder<GetTasksBloc, GetTasksState>(
+                            builder: (context, state) {
+                              return state.mapOrNull(
+                                    successAll: (taskVal) {
+                                      List<TaskEntity> todos =
+                                          taskVal.todo.where((todo) {
+                                        if (todo.isCompleted == null) {
+                                          return false;
+                                        }
+                                        return !todo.isCompleted!;
+                                      }).toList();
+                                      List<TaskEntity> inProgress =
+                                          taskVal.inProgress.where((task) {
+                                        if (task.isCompleted == null) {
+                                          return false;
+                                        }
+                                        return !task.isCompleted!;
+                                      }).toList();
+                                      List<TaskEntity> done =
+                                          taskVal.done.where((task) {
+                                        if (task.isCompleted == null) {
+                                          return false;
+                                        }
+                                        return !task.isCompleted!;
+                                      }).toList();
 
-                                    // log(todos.first.content ?? '');
-                                    return SizedBox(
-                                      height: double.maxFinite,
-                                      child: Column(
-                                        children: [
-                                          Gapper.vGap(),
-                                          Expanded(
-                                            child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              physics:
-                                                  const PageScrollPhysics(),
-                                              controller: PageController(
-                                                  viewportFraction: 0.8,
-                                                  initialPage: 0),
-                                              child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    SectionCard(
-                                                        sectionId:
-                                                            todoSectionVal,
-                                                        sections: sectionsVal
-                                                                .sections
-                                                                ?.sections ??
-                                                            [],
-                                                        tasks: todos,
-                                                        sectionName: "Todo",
-                                                        itemBuilder:
-                                                            (taskID) => [
-                                                                  DropdownMenuItem<
-                                                                          String>(
-                                                                      value:
-                                                                          doneSectionVal,
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(
+                                      // log(todos.first.content ?? '');
+                                      return SizedBox(
+                                        height: double.maxFinite,
+                                        child: Column(
+                                          children: [
+                                            Gapper.vGap(),
+                                            Expanded(
+                                              child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                physics:
+                                                    const PageScrollPhysics(),
+                                                controller: PageController(
+                                                    viewportFraction: 0.8,
+                                                    initialPage: 0),
+                                                child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      SectionCard(
+                                                          sectionId:
+                                                              todoSectionVal,
+                                                          sections: sectionsVal
+                                                                  .sections
+                                                                  ?.sections ??
+                                                              [],
+                                                          tasks: todos,
+                                                          sectionName: "Todo",
+                                                          itemBuilder:
+                                                              (taskID) => [
+                                                                    DropdownMenuItem<
+                                                                            String>(
+                                                                        value:
+                                                                            doneSectionVal,
+                                                                        onTap:
                                                                             () {
-                                                                          // todos.indexOf(element)
-                                                                          final removedTodo = todos.removeAt(todos.indexOf(todos.firstWhere((todo) =>
-                                                                              todo.id ==
-                                                                              taskID)));
-                                                                          inProgress.insert(
-                                                                              0,
-                                                                              removedTodo);
-                                                                        });
-                                                                        context
-                                                                            .read<MoveTaskBloc>()
-                                                                            .add(MoveTaskEvent.attempt(params: MoveTasksParams(id: taskID ?? '', sectionId: inProgressSectionVal)));
-                                                                        if (taskID !=
-                                                                            null) {
-                                                                          localStorage.setItem(
-                                                                              taskID,
-                                                                              DateTime.now().toIso8601String());
-                                                                        }
-                                                                      },
-                                                                      child: const Text(
-                                                                          "To Inprogress")),
-                                                                ]),
-                                                    SectionCard(
-                                                        sectionId:
-                                                            inProgressSectionVal,
-                                                        sections: sectionsVal
-                                                                .sections
-                                                                ?.sections ??
-                                                            [],
-                                                        tasks: inProgress,
-                                                        sectionName:
-                                                            "In Progress",
-                                                        itemBuilder:
-                                                            (taskID) => [
-                                                                  DropdownMenuItem<
-                                                                          String>(
-                                                                      value:
-                                                                          doneSectionVal,
-                                                                      onTap:
-                                                                          () {
-                                                                        context
-                                                                            .read<MoveTaskBloc>()
-                                                                            .add(MoveTaskEvent.attempt(params: MoveTasksParams(id: taskID ?? '', sectionId: doneSectionVal)));
-                                                                        if (taskID !=
-                                                                            null) {
-                                                                          final inProgressStartedTime =
-                                                                              localStorage.getItem(taskID);
-
-                                                                          if (inProgressStartedTime !=
+                                                                          setState(
+                                                                              () {
+                                                                            final removedTodo = todos.removeAt(todos.indexOf(todos.firstWhere((todo) =>
+                                                                                todo.id ==
+                                                                                taskID)));
+                                                                            inProgress.insert(0,
+                                                                                removedTodo);
+                                                                          });
+                                                                          context
+                                                                              .read<MoveTaskBloc>()
+                                                                              .add(MoveTaskEvent.attempt(params: MoveTasksParams(id: taskID ?? '', sectionId: inProgressSectionVal)));
+                                                                          if (taskID !=
                                                                               null) {
-                                                                            Duration
-                                                                                difference =
-                                                                                DateTime.now().difference(DateTime.parse(inProgressStartedTime));
-                                                                            localStorage.setItem(taskID,
-                                                                                difference.toString().split(".").first);
+                                                                            localStorage.setItem("$taskID-startTime",
+                                                                                DateTime.now().toIso8601String());
                                                                           }
-                                                                        }
-                                                                      },
-                                                                      child: const Text(
-                                                                          "To Done"))
-                                                                ]),
-                                                    SectionCard(
-                                                        sectionId:
-                                                            doneSectionVal,
-                                                        sections: sectionsVal
-                                                                .sections
-                                                                ?.sections ??
-                                                            [],
-                                                        tasks: done,
-                                                        sectionName: "Done",
-                                                        itemBuilder:
-                                                            (taskID) => [
-                                                                  DropdownMenuItem<
-                                                                          String>(
-                                                                      value:
-                                                                          doneSectionVal,
-                                                                      onTap:
-                                                                          () {
-                                                                        if (taskID !=
-                                                                            null) {
-                                                                          context.read<CloseTaskBloc>().add(CloseTaskEvent.attempt(CloseTaskParams(
-                                                                              dateCompleted: DateTime.now().toLocal().toUtc().toIso8601String(),
-                                                                              id: taskID)));
-                                                                        }
-                                                                      },
-                                                                      child: const Text(
-                                                                          "Close"))
-                                                                ])
-                                                  ]),
+                                                                        },
+                                                                        child: const Text(
+                                                                            "To Inprogress")),
+                                                                  ]),
+                                                      SectionCard(
+                                                          sectionId:
+                                                              inProgressSectionVal,
+                                                          sections: sectionsVal
+                                                                  .sections
+                                                                  ?.sections ??
+                                                              [],
+                                                          tasks: inProgress,
+                                                          sectionName:
+                                                              "In Progress",
+                                                          itemBuilder:
+                                                              (taskID) => [
+                                                                    DropdownMenuItem<
+                                                                            String>(
+                                                                        value:
+                                                                            doneSectionVal,
+                                                                        onTap:
+                                                                            () {
+                                                                          setState(
+                                                                              () {
+                                                                            // todos.indexOf(element)
+                                                                            final removedTask = inProgress.removeAt(inProgress.indexOf(inProgress.firstWhere((task) =>
+                                                                                task.id ==
+                                                                                taskID)));
+                                                                            done.insert(0,
+                                                                                removedTask);
+                                                                          });
+                                                                          context
+                                                                              .read<MoveTaskBloc>()
+                                                                              .add(MoveTaskEvent.attempt(params: MoveTasksParams(id: taskID ?? '', sectionId: doneSectionVal)));
+                                                                          if (taskID !=
+                                                                              null) {
+                                                                            final inProgressStartedTime =
+                                                                                localStorage.getItem("$taskID-startTime");
+
+                                                                            if (inProgressStartedTime !=
+                                                                                null) {
+                                                                              Duration difference = DateTime.now().difference(DateTime.parse(inProgressStartedTime));
+                                                                              localStorage.setItem("$taskID-duration", difference.toString().split(".").first);
+                                                                              localStorage.removeItem("$taskID-startTime");
+                                                                            }
+                                                                          }
+                                                                        },
+                                                                        child: const Text(
+                                                                            "To Done"))
+                                                                  ]),
+                                                      SectionCard(
+                                                          sectionId:
+                                                              doneSectionVal,
+                                                          sections: sectionsVal
+                                                                  .sections
+                                                                  ?.sections ??
+                                                              [],
+                                                          tasks: done,
+                                                          sectionName: "Done",
+                                                          itemBuilder:
+                                                              (taskID) => [
+                                                                    DropdownMenuItem<
+                                                                            String>(
+                                                                        value:
+                                                                            doneSectionVal,
+                                                                        onTap:
+                                                                            () {
+                                                                          if (taskID !=
+                                                                              null) {
+                                                                            setState(() {
+                                                                              done.removeAt(done.indexOf(done.firstWhere(
+                                                                                (task) => task.id == taskID,
+                                                                                orElse: () => const TaskEntity(),
+                                                                              )));
+                                                                            });
+                                                                            context.read<CloseTaskBloc>().add(CloseTaskEvent.attempt(CloseTaskParams(
+                                                                                dateCompleted: DateTime.now().toLocal().toUtc().toIso8601String(),
+                                                                                id: taskID)));
+                                                                          }
+                                                                        },
+                                                                        child: const Text(
+                                                                            "Close"))
+                                                                  ])
+                                                    ]),
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ) ??
-                                const SizedBox();
-                          },
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    loading: (value) =>
+                                        const TaskScreenShimmer(),
+                                  ) ??
+                                  const SizedBox();
+                            },
+                          ),
                         ),
                       );
                     }) ??

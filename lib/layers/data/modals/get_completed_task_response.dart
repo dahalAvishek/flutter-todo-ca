@@ -31,6 +31,7 @@ class GetCompletedTaskresponse with _$GetCompletedTaskresponse {
                   createdAt: e.createdAt,
                   description: e.description,
                   order: e.order,
+                  taskId: e.taskId,
                   isCompleted: e.isCompleted,
                   projectId: e.projectId,
                   sectionId: e.sectionId),

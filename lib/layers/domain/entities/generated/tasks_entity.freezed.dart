@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TaskEntity {
   String? get id => throw _privateConstructorUsedError;
+  String? get taskId => throw _privateConstructorUsedError;
   String? get projectId => throw _privateConstructorUsedError;
   String? get sectionId => throw _privateConstructorUsedError;
   int? get order => throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $TaskEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {String? id,
+      String? taskId,
       String? projectId,
       String? sectionId,
       int? order,
@@ -65,6 +67,7 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
   @override
   $Res call({
     Object? id = freezed,
+    Object? taskId = freezed,
     Object? projectId = freezed,
     Object? sectionId = freezed,
     Object? order = freezed,
@@ -79,6 +82,10 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      taskId: freezed == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String?,
       projectId: freezed == projectId
           ? _value.projectId
@@ -130,6 +137,7 @@ abstract class _$$TaskEntityImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? id,
+      String? taskId,
       String? projectId,
       String? sectionId,
       int? order,
@@ -153,6 +161,7 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? taskId = freezed,
     Object? projectId = freezed,
     Object? sectionId = freezed,
     Object? order = freezed,
@@ -167,6 +176,10 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      taskId: freezed == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String?,
       projectId: freezed == projectId
           ? _value.projectId
@@ -213,6 +226,7 @@ class __$$TaskEntityImplCopyWithImpl<$Res>
 class _$TaskEntityImpl implements _TaskEntity {
   const _$TaskEntityImpl(
       {this.id,
+      this.taskId,
       this.projectId,
       this.sectionId,
       this.order,
@@ -225,6 +239,8 @@ class _$TaskEntityImpl implements _TaskEntity {
 
   @override
   final String? id;
+  @override
+  final String? taskId;
   @override
   final String? projectId;
   @override
@@ -246,7 +262,7 @@ class _$TaskEntityImpl implements _TaskEntity {
 
   @override
   String toString() {
-    return 'TaskEntity(id: $id, projectId: $projectId, sectionId: $sectionId, order: $order, commentCount: $commentCount, content: $content, description: $description, createdAt: $createdAt, completedAt: $completedAt, isCompleted: $isCompleted)';
+    return 'TaskEntity(id: $id, taskId: $taskId, projectId: $projectId, sectionId: $sectionId, order: $order, commentCount: $commentCount, content: $content, description: $description, createdAt: $createdAt, completedAt: $completedAt, isCompleted: $isCompleted)';
   }
 
   @override
@@ -255,6 +271,7 @@ class _$TaskEntityImpl implements _TaskEntity {
         (other.runtimeType == runtimeType &&
             other is _$TaskEntityImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
             (identical(other.projectId, projectId) ||
                 other.projectId == projectId) &&
             (identical(other.sectionId, sectionId) ||
@@ -274,8 +291,19 @@ class _$TaskEntityImpl implements _TaskEntity {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, projectId, sectionId, order,
-      commentCount, content, description, createdAt, completedAt, isCompleted);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      taskId,
+      projectId,
+      sectionId,
+      order,
+      commentCount,
+      content,
+      description,
+      createdAt,
+      completedAt,
+      isCompleted);
 
   @JsonKey(ignore: true)
   @override
@@ -287,6 +315,7 @@ class _$TaskEntityImpl implements _TaskEntity {
 abstract class _TaskEntity implements TaskEntity {
   const factory _TaskEntity(
       {final String? id,
+      final String? taskId,
       final String? projectId,
       final String? sectionId,
       final int? order,
@@ -299,6 +328,8 @@ abstract class _TaskEntity implements TaskEntity {
 
   @override
   String? get id;
+  @override
+  String? get taskId;
   @override
   String? get projectId;
   @override

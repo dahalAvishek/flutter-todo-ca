@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import '../../../core/presentations/ui/spacer.dart';
 
 class TimerWidget extends StatefulWidget {
-  final DateTime startTime;
+  final DateTime? startTime;
 
-  const TimerWidget({super.key, required this.startTime});
+  const TimerWidget({super.key, this.startTime});
 
   @override
   _TimerWidgetState createState() => _TimerWidgetState();
@@ -27,9 +27,11 @@ class _TimerWidgetState extends State<TimerWidget> {
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final now = DateTime.now();
-      setState(() {
-        _elapsed = now.difference(widget.startTime);
-      });
+      if (widget.startTime != null) {
+        setState(() {
+          _elapsed = now.difference(widget.startTime!);
+        });
+      }
     });
   }
 

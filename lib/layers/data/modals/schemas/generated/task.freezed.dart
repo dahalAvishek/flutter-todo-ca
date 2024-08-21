@@ -33,6 +33,8 @@ mixin _$Task {
   String? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: "completed_at")
   String? get completedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "task_id")
+  String? get taskId => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   int? get order => throw _privateConstructorUsedError;
@@ -55,6 +57,7 @@ abstract class $TaskCopyWith<$Res> {
       @JsonKey(name: "is_completed") bool? isCompleted,
       @JsonKey(name: "created_at") String? createdAt,
       @JsonKey(name: "completed_at") String? completedAt,
+      @JsonKey(name: "task_id") String? taskId,
       String? content,
       String? description,
       int? order,
@@ -81,6 +84,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? isCompleted = freezed,
     Object? createdAt = freezed,
     Object? completedAt = freezed,
+    Object? taskId = freezed,
     Object? content = freezed,
     Object? description = freezed,
     Object? order = freezed,
@@ -114,6 +118,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
       completedAt: freezed == completedAt
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      taskId: freezed == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String?,
       content: freezed == content
           ? _value.content
@@ -150,6 +158,7 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       @JsonKey(name: "is_completed") bool? isCompleted,
       @JsonKey(name: "created_at") String? createdAt,
       @JsonKey(name: "completed_at") String? completedAt,
+      @JsonKey(name: "task_id") String? taskId,
       String? content,
       String? description,
       int? order,
@@ -173,6 +182,7 @@ class __$$TaskImplCopyWithImpl<$Res>
     Object? isCompleted = freezed,
     Object? createdAt = freezed,
     Object? completedAt = freezed,
+    Object? taskId = freezed,
     Object? content = freezed,
     Object? description = freezed,
     Object? order = freezed,
@@ -207,6 +217,10 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.completedAt
           : completedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      taskId: freezed == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as String?,
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -238,6 +252,7 @@ class _$TaskImpl extends _Task {
       @JsonKey(name: "is_completed") this.isCompleted,
       @JsonKey(name: "created_at") this.createdAt,
       @JsonKey(name: "completed_at") this.completedAt,
+      @JsonKey(name: "task_id") this.taskId,
       this.content,
       this.description,
       this.order,
@@ -268,6 +283,9 @@ class _$TaskImpl extends _Task {
   @JsonKey(name: "completed_at")
   final String? completedAt;
   @override
+  @JsonKey(name: "task_id")
+  final String? taskId;
+  @override
   final String? content;
   @override
   final String? description;
@@ -278,7 +296,7 @@ class _$TaskImpl extends _Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, projectId: $projectId, sectionId: $sectionId, commentCount: $commentCount, isCompleted: $isCompleted, createdAt: $createdAt, completedAt: $completedAt, content: $content, description: $description, order: $order, name: $name)';
+    return 'Task(id: $id, projectId: $projectId, sectionId: $sectionId, commentCount: $commentCount, isCompleted: $isCompleted, createdAt: $createdAt, completedAt: $completedAt, taskId: $taskId, content: $content, description: $description, order: $order, name: $name)';
   }
 
   @override
@@ -299,6 +317,7 @@ class _$TaskImpl extends _Task {
                 other.createdAt == createdAt) &&
             (identical(other.completedAt, completedAt) ||
                 other.completedAt == completedAt) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -317,6 +336,7 @@ class _$TaskImpl extends _Task {
       isCompleted,
       createdAt,
       completedAt,
+      taskId,
       content,
       description,
       order,
@@ -338,6 +358,7 @@ abstract class _Task extends Task {
       @JsonKey(name: "is_completed") final bool? isCompleted,
       @JsonKey(name: "created_at") final String? createdAt,
       @JsonKey(name: "completed_at") final String? completedAt,
+      @JsonKey(name: "task_id") final String? taskId,
       final String? content,
       final String? description,
       final int? order,
@@ -366,6 +387,9 @@ abstract class _Task extends Task {
   @override
   @JsonKey(name: "completed_at")
   String? get completedAt;
+  @override
+  @JsonKey(name: "task_id")
+  String? get taskId;
   @override
   String? get content;
   @override

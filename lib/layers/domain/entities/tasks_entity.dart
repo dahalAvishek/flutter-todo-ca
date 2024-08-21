@@ -6,6 +6,7 @@ part 'generated/tasks_entity.freezed.dart';
 class TaskEntity with _$TaskEntity {
   const factory TaskEntity({
     String? id,
+    String? taskId,
     String? projectId,
     String? sectionId,
     int? order,

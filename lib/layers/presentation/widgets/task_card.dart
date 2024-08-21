@@ -50,6 +50,9 @@ class _TaskCardState extends State<TaskCard> {
   final TextEditingController _commentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    if (widget.task.id != null) {
+      log("${widget.task.id}-duration");
+    }
     return BlocProvider(
       create: (context) => GetTaskBloc(sl()),
       child: MultiBlocListener(
@@ -164,27 +167,29 @@ class _TaskCardState extends State<TaskCard> {
                                     Theme.of(context).colorScheme.onSecondary),
                       ),
                       Gapper.vGap(),
-                      widget.task.id != null &&
-                                  localStorage.getItem(widget.task.id!) !=
-                                      null &&
-                                  widget.isInProgressCard ??
-                              false
+                      widget.isInProgressCard &&
+                              widget.task.id != null &&
+                              localStorage
+                                      .getItem("${widget.task.id}-startTime") !=
+                                  null
                           ? TimerWidget(
-                              startTime: DateTime.parse(
-                                  localStorage.getItem(widget.task.id!)!))
+                              startTime: DateTime.parse(localStorage
+                                  .getItem("${widget.task.id}-startTime")!))
                           : const SizedBox(),
-                      widget.isDoneCard ?? false
+                      widget.isInProgressCard ?? false
                           ? Gapper.vGap()
                           : const SizedBox(),
                       widget.task.id != null &&
-                                  localStorage.getItem(widget.task.id!) !=
+                                  localStorage.getItem(
+                                          "${widget.task.id}-duration") !=
                                       null &&
                                   widget.isDoneCard ??
                               false
                           ? ElapsedTimeWidget(
-                              duration: localStorage.getItem(widget.task.id!)!)
+                              duration: localStorage
+                                  .getItem("${widget.task.id}-duration")!)
                           : const SizedBox(),
-                      widget.isInProgressCard ?? false
+                      widget.isDoneCard ?? false
                           ? Gapper.vGap()
                           : const SizedBox(),
                       const Divider(),

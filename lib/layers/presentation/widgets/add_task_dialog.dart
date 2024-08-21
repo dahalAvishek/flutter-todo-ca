@@ -6,7 +6,6 @@ import '../../../bootstrap/presentation/blocs/get_sections/get_sections_bloc.dar
 import '../../../core/presentations/widgets/button.dart';
 import '../blocs/create_task/create_task_bloc.dart';
 import '../blocs/edit_task/edit_task_bloc.dart';
-import '../blocs/get_tasks/get_tasks_bloc.dart';
 
 class AddTaskDialog extends StatefulWidget {
   final String? name;
@@ -32,107 +31,89 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
       builder: (context, state) {
         return state.mapOrNull(
               success: (getSectionsV) {
-                return BlocListener<CreateTaskBloc, CreateTaskState>(
-                  listener: (context, state) {
-                    state.mapOrNull(
-                      success: (createTaskV) {
-                        if (getSectionsV.sections?.sections?.first.id != null) {
-                          context.read<GetTasksBloc>().add(
-                              GetTasksEvent.getTasks(
-                                  doneStringId: getSectionsV
-                                      .sections!.sections!.first.id!,
-                                  inProgressSectionId: getSectionsV
-                                      .sections!.sections!.first.id!,
-                                  todoSectionId: getSectionsV
-                                      .sections!.sections!.first.id!));
-                        }
-                      },
-                    );
-                  },
-                  child: AlertDialog(
-                    title: const Text('Add Task'),
-                    content: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text("Task Name"),
-                          TextFormField(
-                            // initialValue: widget.name,
-                            controller: nameController,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Name required";
-                              }
-                              return null;
-                            },
-                          ),
-                          Gapper.vGap(),
-                          const Text("Desctiption"),
-                          TextFormField(
-                            controller: descriptionController,
-                          ),
-                        ],
-                      ),
+                return AlertDialog(
+                  title: const Text('Add Task'),
+                  content: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text("Task Name"),
+                        TextFormField(
+                          // initialValue: widget.name,
+                          controller: nameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Name required";
+                            }
+                            return null;
+                          },
+                        ),
+                        Gapper.vGap(),
+                        const Text("Desctiption"),
+                        TextFormField(
+                          controller: descriptionController,
+                        ),
+                      ],
                     ),
-                    actions: <Widget>[
-                      Button(
-                        borderColor: Colors.transparent,
-                        label: Text(
-                          "Cancel",
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.onSurface),
-                        ),
-                        width: 70,
-                        height: 25,
-                        handleTap: () => Navigator.pop(context),
-                        // isButtonDisabled: _formKey.currentState?.validate(),
-                      ),
-                      Button(
-                        borderColor: Colors.transparent,
-                        label: Text(
-                          widget.taskId == null ? "Add Task" : "Edit Task",
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.onSurface),
-                        ),
-                        handleTap: () {
-                          if (widget.taskId == null) {
-                            if (_formKey.currentState?.validate() != null &&
-                                _formKey.currentState!.validate() &&
-                                getSectionsV.sections?.sections?.first.id !=
-                                    null) {
-                              context
-                                  .read<CreateTaskBloc>()
-                                  .add(CreateTaskEvent.attempt(
-                                    content: nameController.text,
-                                    sectionId: getSectionsV
-                                        .sections!.sections!.first.id!,
-                                    description: descriptionController.text,
-                                  )); // Navigator.pop(context);
-                            }
-                          } else {
-                            if (_formKey.currentState?.validate() != null &&
-                                _formKey.currentState!.validate() &&
-                                getSectionsV.sections?.sections?.first.id !=
-                                    null) {
-                              context
-                                  .read<EditTaskBloc>()
-                                  .add(EditTaskEvent.attempt(
-                                    content: nameController.text,
-                                    taskId: widget.taskId!,
-                                    description: descriptionController.text,
-                                  )); // Navigator.pop(context);
-                            }
-                          }
-                          Navigator.pop(context);
-                        },
-                        width: 100,
-                        height: 25,
-                        // isButtonDisabled: _formKey.currentState?.validate(),
-                      ),
-                    ],
                   ),
+                  actions: <Widget>[
+                    Button(
+                      borderColor: Colors.transparent,
+                      label: Text(
+                        "Cancel",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                      width: 70,
+                      height: 25,
+                      handleTap: () => Navigator.pop(context),
+                      // isButtonDisabled: _formKey.currentState?.validate(),
+                    ),
+                    Button(
+                      borderColor: Colors.transparent,
+                      label: Text(
+                        widget.taskId == null ? "Add Task" : "Edit Task",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                      handleTap: () {
+                        if (widget.taskId == null) {
+                          if (_formKey.currentState?.validate() != null &&
+                              _formKey.currentState!.validate() &&
+                              getSectionsV.sections?.sections?.first.id !=
+                                  null) {
+                            context
+                                .read<CreateTaskBloc>()
+                                .add(CreateTaskEvent.attempt(
+                                  content: nameController.text,
+                                  sectionId: getSectionsV
+                                      .sections!.sections!.first.id!,
+                                  description: descriptionController.text,
+                                )); // Navigator.pop(context);
+                          }
+                        } else {
+                          if (_formKey.currentState?.validate() != null &&
+                              _formKey.currentState!.validate() &&
+                              getSectionsV.sections?.sections?.first.id !=
+                                  null) {
+                            context
+                                .read<EditTaskBloc>()
+                                .add(EditTaskEvent.attempt(
+                                  content: nameController.text,
+                                  taskId: widget.taskId!,
+                                  description: descriptionController.text,
+                                )); // Navigator.pop(context);
+                          }
+                        }
+                        Navigator.pop(context);
+                      },
+                      width: 100,
+                      height: 25,
+                      // isButtonDisabled: _formKey.currentState?.validate(),
+                    ),
+                  ],
                 );
               },
             ) ??

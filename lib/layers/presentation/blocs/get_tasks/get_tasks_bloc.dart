@@ -5,7 +5,6 @@ import '../../../../core/error/failures.dart';
 import '../../../../utils/services/secure_storage.dart';
 import '../../../domain/entities/tasks_entity.dart';
 import '../../../domain/usecases/get_tasks.dart';
-import '../../../domain/usecases/move_task.dart';
 
 part 'generated/get_tasks_bloc.freezed.dart';
 part 'get_tasks_event.dart';
