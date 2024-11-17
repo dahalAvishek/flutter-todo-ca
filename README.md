@@ -33,17 +33,17 @@ A new Flutter project.
   touch .env
   ```
 - **Add your Todoist account access token:** : Open the .env file and add your Todoist access token as shown below:
-- ```sh
+  ```sh
   TODOIST_USER_TOKEN=<<YOUR_ACCESS_TOKEN>>
   ```
-  Replace `<<YOUR_API_KEY>>` with the actual access token you copied from the Todoist app.
+  Replace `<<YOUR_ACCESS_TOKEN>>` with the actual access token you copied from the Todoist app.
 
 #### 3. Run the Flutter Todo App
 
 - install libraries using
   ```sh
   flutter pub get
-  ```sh
+  ```
 - **Run on Android:** You can run the app on an Android device or emulator using either VS Code or Android Studio.
 
 ### Project Architecture
